@@ -1,15 +1,20 @@
 [[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  conditions = { NOT = { Path = ["/admin/*", "*.yml", "*.yaml", "*.json", "*.xml", "*.txt"] } }
+  conditions = { NOT = { Path = ["/config.yml", "*.yml", "*.yaml", "*.json", "*.xml", "*.txt"] } }
 
 [build]
   command = "npm run build"
   publish = "dist"
 
 [[headers]]
-  for = "/admin/config.yml"
+  for = "/config.yml"
   [headers.values]
     Content-Type = "application/x-yaml; charset=utf-8"
 

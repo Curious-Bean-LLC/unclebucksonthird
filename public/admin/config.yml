@@ -47,6 +47,7 @@ collections:
       - { label: 'Effective Date', name: 'date', widget: 'datetime' }
       - { label: 'Menu File', name: 'menuFile', widget: 'file' }
   - name: 'catering_images'
+    title: 'Catering Images'
     label: 'Catering Images'
     folder: '_images/catering'
     create: true
@@ -55,6 +56,7 @@ collections:
       - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
       - { label: 'Image File', name: 'imageFile', widget: 'file' }
   - name: 'gallery_images'
+    title: 'Gallery Images'
     label: 'Gallery Images'
     folder: '_images/gallery'
     create: true
