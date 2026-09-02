@@ -1,6 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { PageContainer } from './PageContainer'
 import Home from './pages/Home'
+import Admin from './pages/Admin'
+import ErrorBoundary from './ErrorBoundary'
 
 import CMS from "decap-cms-app";
 // Initialize the CMS object
@@ -10,8 +12,14 @@ CMS.init();
 
 const router = createBrowserRouter([
   {
+    path: '/admin',
+    element: <Admin />,
+    errorElement: <ErrorBoundary />,
+  },
+  {
     path: '/',
     element: <PageContainer />,
+    errorElement: <ErrorBoundary />,
     children: [
       {
         path: '/',
