@@ -1,0 +1,64 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# These lines should *not* be indented
+media_folder: "public/images/uploads" # Media files will be stored in the repo under static/images/uploads
+public_folder: "/images/uploads" # The src attribute for uploaded media will begin with /images/uploads
+
+collections:
+  - name: 'event_onetime'
+    label: 'One-Time Event'
+    folder: '_events/onetime'
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    fields:
+      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'event' }
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Date', name: 'date', widget: 'datetime' }
+      - { label: 'Promo Image', name: 'flyer', widget: 'image' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'event_recurring'
+    label: 'Recurring Event'
+    folder: '_events/recurring'
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    fields:
+      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'event' }
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Initial Date', name: 'date', widget: 'datetime' }
+      - { label: 'End Date', name: 'endDate', widget: 'datetime' }
+      - { label: 'Promo Image', name: 'flyer', widget: 'image' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+      - {
+          label: 'Recurring Frequency',
+          name: 'recurringFrequency',
+          widget: 'select',
+          options: ['Daily', 'Weekly', 'Monthly'],
+        }
+  - name: 'menus'
+    label: 'Menus'
+    folder: '_menus'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'menu' }
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Effective Date', name: 'date', widget: 'datetime' }
+      - { label: 'Menu File', name: 'menuFile', widget: 'file' }
+  - name: 'catering_images'
+    label: 'Catering Images'
+    folder: '_images/catering'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
+      - { label: 'Image File', name: 'imageFile', widget: 'file' }
+  - name: 'gallery_images'
+    label: 'Gallery Images'
+    folder: '_images/gallery'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
+      - { label: 'Image File', name: 'imageFile', widget: 'file' }
