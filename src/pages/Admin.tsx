@@ -1,10 +1,10 @@
+import CMS from 'decap-cms-app'
 import { useEffect } from 'react'
 
 export default function Admin() {
   useEffect(() => {
-    // Decap CMS is initialized globally in App.tsx
-    // This component just provides the mount point
+    CMS.init()
   }, [])
 
-  return <div id="nc-root" />
+  return <div id='nc-root' key='admin-body' />
 }

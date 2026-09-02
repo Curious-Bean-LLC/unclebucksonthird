@@ -5,7 +5,7 @@ export default function ErrorBoundary() {
 
   if (isRouteErrorResponse(error)) {
     return (
-      <div style={{ padding: '20px' }}>
+      <div style={{ padding: '20px' }} key={'error-boundary-' + error.status}>
         <h1>Error {error.status}</h1>
         <p>{error.statusText}</p>
         {error.data && <pre>{error.data}</pre>}
@@ -14,7 +14,7 @@ export default function ErrorBoundary() {
   }
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div style={{ padding: '20px' }} key='error-boundary-unknown'>
       <h1>An error occurred</h1>
       <p>{error instanceof Error ? error.message : 'Unknown error'}</p>
     </div>
