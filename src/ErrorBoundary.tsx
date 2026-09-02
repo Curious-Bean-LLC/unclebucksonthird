@@ -16,7 +16,7 @@ export default function ErrorBoundary() {
   return (
     <div style={{ padding: '20px' }}>
       <h1>An error occurred</h1>
-      <p>{(error?.message ?? '') || 'Unknown error'}</p>
+      <p>{error instanceof Error ? error.message : 'Unknown error'}</p>
     </div>
   )
 }
