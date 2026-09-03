@@ -25,11 +25,6 @@
   --color-ub-white: #ffffff;
 }
 
-:root {
-  --ub-orange: #ee6339;
-  --ub-dark: #0e2620;
-}
-
 h1,
 h2,
 h3,
@@ -48,8 +43,46 @@ nav {
 body {
   font-family: 'Sintony', sans-serif;
   font-size: 1rem;
+  color: var(--color-ub-dark);
 }
 
-td {
-  padding: 0.25rem;
+button {
+  font-family: 'Grenze', serif;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+}
+
+.loose-table {
+  td {
+    padding: 0.25rem;
+  }
+}
+
+.tight-table {
+  td {
+    padding: 0.125rem 0.5rem;
+  }
+}
+
+form {
+  p {
+    text-align: left;
+    padding: 0.5rem 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+    }
+
+    input,
+    textarea,
+    select {
+      color: var(--color-ub-orange);
+      padding: 0.5rem;
+      border: 1px solid var(--color-ub-dark);
+      border-radius: 0.5rem;
+    }
+  }
 }
