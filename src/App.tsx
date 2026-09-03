@@ -1,8 +1,15 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ErrorBoundary from './ErrorBoundary'
-import { PageContainer } from './PageContainer'
+import PageContainer from './PageContainer'
+import About from './pages/About'
 import Admin from './pages/Admin'
+import Beer from './pages/Beer'
+import Events from './pages/Events'
 import Home from './pages/Home'
+import Menu from './pages/Menu'
+import PrivateEventsCatering from './pages/PrivateEventsCatering'
+import Reservations from './pages/Reservations'
+import Wine from './pages/Wine'
 
 // Initialize the CMS object
 // CMS.init()
@@ -23,6 +30,34 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home key='home-view' />,
+      },
+      {
+        path: '/menu',
+        element: <Menu key='menu-view' />,
+      },
+      {
+        path: '/beer',
+        element: <Beer key='beer-view' />,
+      },
+      {
+        path: '/wine',
+        element: <Wine key='wine-view' />,
+      },
+      {
+        path: '/private-events-catering',
+        element: <PrivateEventsCatering key='private-events-catering-view' />,
+      },
+      {
+        path: '/events',
+        element: <Events key='events-view' />,
+      },
+      {
+        path: '/reservations',
+        element: <Reservations key='reservations-view' />,
+      },
+      {
+        path: '/about',
+        element: <About key='about-view' />,
       },
     ],
   },
