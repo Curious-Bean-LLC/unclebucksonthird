@@ -18,19 +18,37 @@ export function useLoadImages(folderPath: string) {
   useEffect(() => {
     const loadImages = async () => {
       try {
-        // Dynamically import all markdown files from the specified folder in public
-        const modules = import.meta.glob('../../../public/_images/**/*.md', {
-          as: 'raw',
-        })
+        // Fetch manifest file that lists the markdown files
+        const manifestResponse = await fetch(`/_images/${folderPath}/.manifest.json`)
+        
+        if (!manifestResponse.ok) {
+          console.warn(
+            `No manifest found for _images/${folderPath}. Make sure .manifest.json exists.`,
+          )
+          setImages([])
+          setLoading(false)
+          return
+        }
+
+        const manifest = (await manifestResponse.json()) as { files: string[] }
+        const mdFiles = manifest.files || []
+
+        if (mdFiles.length === 0) {
+          setImages([])
+          setLoading(false)
+          return
+        }
 
         const imageData: ParsedImage[] = []
 
-        for (const [path, importFn] of Object.entries(modules)) {
-          // Filter to only include files from the specified folder
-          if (path.includes(`_images/${folderPath}/`)) {
-            const content = await (importFn as () => Promise<string>)()
+        for (const mdFile of mdFiles) {
+          try {
+            const fileResponse = await fetch(`/_images/${folderPath}/${mdFile}`)
+            if (!fileResponse.ok) continue
+
+            const content = await fileResponse.text()
             const { data } = matter(content)
-            
+
             if (data.imageFile) {
               imageData.push({
                 frontmatter: {
@@ -39,10 +57,11 @@ export function useLoadImages(folderPath: string) {
                 },
               })
             }
+          } catch (err) {
+            console.warn(`Error loading file _images/${folderPath}/${mdFile}:`, err)
           }
         }
 
-        // Extract image file paths
         const imagePaths = imageData.map(img => img.frontmatter.imageFile)
         setImages(imagePaths)
       } catch (err) {

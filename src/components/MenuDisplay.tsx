@@ -1,20 +1,8 @@
 import { useEffect, useState } from 'react'
-import matter from 'gray-matter'
 import PdfMenuPreview from './PdfMenuPreview'
 import SpecialItemCard from './SpecialItemCard'
-
-interface MenuItem {
-  itemName: string
-  itemImage?: string
-  itemDescription: string
-  itemNote?: string
-  itemPrice: string
-}
-
-interface MenuSpecial {
-  frontmatter: MenuItem
-  body: string
-}
+import { useLoadMenus } from '../hooks/useLoadMenus'
+import { useLoadSpecials } from '../hooks/useLoadSpecials'
 
 interface MenuDisplayProps {
   menuFolder: string
@@ -27,56 +15,16 @@ export default function MenuDisplay({
   specialsFolder,
   menuTitle,
 }: MenuDisplayProps) {
-  const [menuFile, setMenuFile] = useState<string>('')
-  const [specials, setSpecials] = useState<MenuSpecial[]>([])
+  const { menuFile, loading: menuLoading } = useLoadMenus(menuFolder)
+  const { specials, loading: specialsLoading } = useLoadSpecials(specialsFolder)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const loadMenuAndSpecials = async () => {
-      try {
-        // Load menu markdown
-        const menuModules = import.meta.glob('../../_menus/*/*.md', {
-          as: 'raw',
-        })
-
-        for (const [path, importFn] of Object.entries(menuModules)) {
-          if (path.includes(menuFolder)) {
-            const content = await (importFn as () => Promise<string>)()
-            const { data } = matter(content)
-            if (data.menuFile) {
-              setMenuFile(data.menuFile)
-            }
-          }
-        }
-
-        // Load specials
-        const specialsModules = import.meta.glob(
-          '../../_menus/specials/*/*.md',
-          { as: 'raw' },
-        )
-        const specialsData: MenuSpecial[] = []
-
-        for (const [path, importFn] of Object.entries(specialsModules)) {
-          if (path.includes(`specials/${specialsFolder}`)) {
-            const content = await (importFn as () => Promise<string>)()
-            const { data } = matter(content)
-            specialsData.push({
-              frontmatter: data as MenuItem,
-              body: content,
-            })
-          }
-        }
-
-        setSpecials(specialsData)
-      } catch (error) {
-        console.error('Error loading menu:', error)
-      } finally {
-        setLoading(false)
-      }
+    // Both hooks loaded when menuLoading and specialsLoading are false
+    if (!menuLoading && !specialsLoading) {
+      setLoading(false)
     }
-
-    loadMenuAndSpecials()
-  }, [menuFolder, specialsFolder])
+  }, [menuLoading, specialsLoading])
 
   if (loading) {
     return <div className='text-center py-8'>Loading menu...</div>

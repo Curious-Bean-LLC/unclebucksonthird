@@ -41,47 +41,63 @@ export default function Events() {
   useEffect(() => {
     const loadEvents = async () => {
       try {
-        // Import all recurring events
-        const recurringModules = import.meta.glob(
-          '../../../public/_events/recurring/*.md',
-          { as: 'raw' },
-        )
-        const recurringData: ParsedEvent[] = []
+        const loadEventFolder = async (
+          folderType: 'recurring' | 'onetime',
+        ): Promise<ParsedEvent[]> => {
+          const manifestResponse = await fetch(`/_events/${folderType}/.manifest.json`)
+          
+          if (!manifestResponse.ok) {
+            console.warn(
+              `No manifest found for _events/${folderType}. Make sure .manifest.json exists.`,
+            )
+            return []
+          }
 
-        for (const [, importFn] of Object.entries(recurringModules)) {
-          const content = await (importFn as () => Promise<string>)()
-          const parsed = parseMarkdown(content)
-          recurringData.push(parsed)
+          const manifest = (await manifestResponse.json()) as { files: string[] }
+          const mdFiles = manifest.files || []
+
+          if (mdFiles.length === 0) {
+            return []
+          }
+
+          const events: ParsedEvent[] = []
+
+          for (const mdFile of mdFiles) {
+            try {
+              const fileResponse = await fetch(`/_events/${folderType}/${mdFile}`)
+              if (!fileResponse.ok) continue
+
+              const content = await fileResponse.text()
+              const parsed = parseMarkdown(content)
+              events.push(parsed)
+            } catch (err) {
+              console.warn(
+                `Error loading file _events/${folderType}/${mdFile}:`,
+                err,
+              )
+            }
+          }
+
+          return events
         }
 
-        // Sort recurring events by date
-        recurringData.sort(
+        const recurringEvents = await loadEventFolder('recurring')
+        const onetimeEvents = await loadEventFolder('onetime')
+
+        recurringEvents.sort(
           (a, b) =>
             new Date(a.frontmatter.date).getTime() -
             new Date(b.frontmatter.date).getTime(),
         )
 
-        // Import all onetime events
-        const onetimeModules = import.meta.glob('../../../public/_events/onetime/*.md', {
-          as: 'raw',
-        })
-        const onetimeData: ParsedEvent[] = []
-
-        for (const [, importFn] of Object.entries(onetimeModules)) {
-          const content = await (importFn as () => Promise<string>)()
-          const parsed = parseMarkdown(content)
-          onetimeData.push(parsed)
-        }
-
-        // Sort onetime events by date (newest first)
-        onetimeData.sort(
+        onetimeEvents.sort(
           (a, b) =>
             new Date(b.frontmatter.date).getTime() -
             new Date(a.frontmatter.date).getTime(),
         )
 
-        setRecurringEvents(recurringData)
-        setOnetimeEvents(onetimeData)
+        setRecurringEvents(recurringEvents)
+        setOnetimeEvents(onetimeEvents)
       } catch (error) {
         console.error('Error loading events:', error)
       } finally {
