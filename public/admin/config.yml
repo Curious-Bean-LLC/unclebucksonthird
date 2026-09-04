@@ -9,7 +9,7 @@ public_folder: '/images/uploads' # The src attribute for uploaded media will beg
 collections:
   - name: 'main_menu'
     label: 'Main Menu'
-    folder: '_menus/main'
+    folder: 'public/_menus/main'
     create: true
     slug: '{{slug}}'
     fields:
@@ -19,7 +19,7 @@ collections:
       - { label: 'Menu File', name: 'menuFile', widget: 'file' }
   - name: 'beer_menu'
     label: 'Beer Menu'
-    folder: '_menus/beer'
+    folder: 'public/_menus/beer'
     create: true
     slug: '{{slug}}'
     fields:
@@ -29,7 +29,7 @@ collections:
       - { label: 'Menu File', name: 'menuFile', widget: 'file' }
   - name: 'wine_menu'
     label: 'Wine Menu'
-    folder: '_menus/wine'
+    folder: 'public/_menus/wine'
     create: true
     slug: '{{slug}}'
     fields:
@@ -39,7 +39,7 @@ collections:
       - { label: 'Menu File', name: 'menuFile', widget: 'file' }
   - name: 'main_specials'
     label: 'Main Specials'
-    folder: '_menus/specials/main'
+    folder: 'public/_menus/specials/main'
     create: true
     slug: '{{slug}}'
     fields:
@@ -51,7 +51,7 @@ collections:
       - { label: 'Item Price', name: 'itemPrice', widget: 'string' }
   - name: 'beer_specials'
     label: 'Beer Specials'
-    folder: '_menus/specials/beer'
+    folder: 'public/_menus/specials/beer'
     create: true
     slug: '{{slug}}'
     fields:
@@ -63,7 +63,7 @@ collections:
       - { label: 'Item Price', name: 'itemPrice', widget: 'string' }
   - name: 'wine_specials'
     label: 'Wine Specials'
-    folder: '_menus/specials/wine'
+    folder: 'public/_menus/specials/wine'
     create: true
     slug: '{{slug}}'
     fields:
@@ -75,7 +75,7 @@ collections:
       - { label: 'Item Price', name: 'itemPrice', widget: 'string' }
   - name: 'catering_menu'
     label: 'Catering Menu'
-    folder: '_menus/catering'
+    folder: 'public/_menus/catering'
     create: true
     slug: '{{slug}}'
     fields:
@@ -85,7 +85,7 @@ collections:
       - { label: 'Menu File', name: 'menuFile', widget: 'file' }
   - name: 'event_onetime'
     label: 'One-Time Event'
-    folder: '_events/onetime'
+    folder: 'public/_events/onetime'
     create: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     fields:
@@ -96,7 +96,7 @@ collections:
       - { label: 'Body', name: 'body', widget: 'markdown' }
   - name: 'event_recurring'
     label: 'Recurring Event'
-    folder: '_events/recurring'
+    folder: 'public/_events/recurring'
     create: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     fields:
@@ -114,7 +114,7 @@ collections:
         }
   - name: 'home_images'
     label: 'Home Images'
-    folder: '_images/home'
+    folder: 'public/_images/home'
     create: true
     slug: '{{slug}}'
     fields:
@@ -122,7 +122,7 @@ collections:
       - { label: 'Image File', name: 'imageFile', widget: 'file' }
   - name: 'catering_images'
     label: 'Catering Images'
-    folder: '_images/catering'
+    folder: 'public/_images/catering'
     create: true
     slug: '{{slug}}'
     fields:
@@ -130,7 +130,7 @@ collections:
       - { label: 'Image File', name: 'imageFile', widget: 'file' }
   - name: 'about_images'
     label: 'About Images'
-    folder: '_images/about'
+    folder: 'public/_images/about'
     create: true
     slug: '{{slug}}'
     fields:
@@ -138,7 +138,7 @@ collections:
       - { label: 'Image File', name: 'imageFile', widget: 'file' }
   - name: 'reservations_images'
     label: 'Reservations Images'
-    folder: '_images/reservations'
+    folder: 'public/_images/reservations'
     create: true
     slug: '{{slug}}'
     fields:
@@ -146,7 +146,7 @@ collections:
       - { label: 'Image File', name: 'imageFile', widget: 'file' }
   - name: 'events_images'
     label: 'Events Images'
-    folder: '_images/events'
+    folder: 'public/_images/events'
     create: true
     slug: '{{slug}}'
     fields:

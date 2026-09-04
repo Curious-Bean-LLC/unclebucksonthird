@@ -18,8 +18,8 @@ export function useLoadImages(folderPath: string) {
   useEffect(() => {
     const loadImages = async () => {
       try {
-        // Dynamically import all markdown files from the specified folder
-        const modules = import.meta.glob('../../_images/**/*.md', {
+        // Dynamically import all markdown files from the specified folder in public
+        const modules = import.meta.glob('../../../public/_images/**/*.md', {
           as: 'raw',
         })
 

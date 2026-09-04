@@ -43,7 +43,7 @@ export default function Events() {
       try {
         // Import all recurring events
         const recurringModules = import.meta.glob(
-          '../../_events/recurring/*.md',
+          '../../../public/_events/recurring/*.md',
           { as: 'raw' },
         )
         const recurringData: ParsedEvent[] = []
@@ -62,7 +62,7 @@ export default function Events() {
         )
 
         // Import all onetime events
-        const onetimeModules = import.meta.glob('../../_events/onetime/*.md', {
+        const onetimeModules = import.meta.glob('../../../public/_events/onetime/*.md', {
           as: 'raw',
         })
         const onetimeData: ParsedEvent[] = []
