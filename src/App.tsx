@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ErrorBoundary from './ErrorBoundary'
 import PageContainer from './PageContainer'
 import About from './pages/About'
-import Admin from './pages/Admin'
 import Beer from './pages/Beer'
 import Events from './pages/Events'
 import Home from './pages/Home'
@@ -11,17 +10,7 @@ import PrivateEventsCatering from './pages/PrivateEventsCatering'
 import Reservations from './pages/Reservations'
 import Wine from './pages/Wine'
 
-// Initialize the CMS object
-// CMS.init()
-// Now the registry is available via the CMS object.
-// CMS.registerPreviewTemplate('my-template', MyTemplate)
-
 const router = createBrowserRouter([
-  {
-    path: '/admin',
-    element: <Admin key='admin-view' />,
-    errorElement: <ErrorBoundary />,
-  },
   {
     path: '/',
     element: <PageContainer key='page-container' />,
