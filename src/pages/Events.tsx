@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
 import matter from 'gray-matter'
+import { useEffect, useState } from 'react'
 
 interface EventFrontmatter {
   layout: string

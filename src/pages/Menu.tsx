@@ -1,8 +1,11 @@
+import MenuDisplay from '../components/MenuDisplay'
+
 export default function Menu() {
   return (
-    <div>
-      <h1>Menu</h1>
-      <p>Welcome to the Menu page!</p>
-    </div>
+    <MenuDisplay
+      menuFolder='main'
+      specialsFolder='main'
+      menuTitle='Main Menu'
+    />
   )
 }

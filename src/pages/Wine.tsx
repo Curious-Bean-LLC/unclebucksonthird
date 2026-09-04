@@ -1,8 +1,7 @@
+import MenuDisplay from '../components/MenuDisplay'
+
 export default function Wine() {
   return (
-    <div>
-      <h1>Wine</h1>
-      <p>Welcome to the Wine page!</p>
-    </div>
+    <MenuDisplay menuFolder='wine' specialsFolder='wine' menuTitle='Wine' />
   )
 }
