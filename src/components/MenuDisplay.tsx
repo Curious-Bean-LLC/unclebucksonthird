@@ -35,7 +35,7 @@ export default function MenuDisplay({
     const loadMenuAndSpecials = async () => {
       try {
         // Load menu markdown
-        const menuModules = import.meta.glob('../../_menus/*/*.md', {
+        const menuModules = import.meta.glob('../../public/_menus/*/*.md', {
           as: 'raw',
         })
 
@@ -51,7 +51,7 @@ export default function MenuDisplay({
 
         // Load specials
         const specialsModules = import.meta.glob(
-          '../../_menus/specials/*/*.md',
+          '../../public/_menus/specials/*/*.md',
           { as: 'raw' },
         )
         const specialsData: MenuSpecial[] = []
