@@ -7,7 +7,7 @@
   from = "/*"
   to = "/index.html"
   status = 200
-  conditions = { NOT = { Path = ["/config.yml", "*.yml", "*.yaml", "*.json", "*.xml", "*.txt"] } }
+  conditions = { NOT = { Path = ["/config.yml", "/index.html", "*.yml", "*.yaml", "*.json", "*.xml", "*.txt", "*.js", "*.css", "*.woff", "*.woff2", "*.ttf", "*.eot", "*.svg", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.ico"] } }
 
 [build]
   command = "npm run build"
