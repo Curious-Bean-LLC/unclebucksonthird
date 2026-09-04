@@ -64,34 +64,33 @@ export default function PageContainer() {
         >
           About
         </NavLink>
+        <div className='flex gap-4 items-center justify-center'>
+          <a
+            href='https://facebook.com'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='text-xl text-ub-orange hover:text-ub-dark'
+          >
+            <FaFacebook />
+          </a>
+          <a
+            href='https://instagram.com'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='text-xl text-ub-orange hover:text-ub-dark'
+          >
+            <FaInstagram />
+          </a>
+          <a
+            href='https://yelp.com'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='text-xl text-ub-orange hover:text-ub-dark'
+          >
+            <FaYelp />
+          </a>
+        </div>
       </nav>
-
-      <div className='flex gap-4 items-center justify-center transition-opacity'>
-        <a
-          href='https://facebook.com'
-          target='_blank'
-          rel='noopener noreferrer'
-          className='text-xl text-ub-orange hover:text-ub-dark'
-        >
-          <FaFacebook />
-        </a>
-        <a
-          href='https://instagram.com'
-          target='_blank'
-          rel='noopener noreferrer'
-          className='text-xl text-ub-orange hover:text-ub-dark'
-        >
-          <FaInstagram />
-        </a>
-        <a
-          href='https://yelp.com'
-          target='_blank'
-          rel='noopener noreferrer'
-          className='text-xl text-ub-orange hover:text-ub-dark'
-        >
-          <FaYelp />
-        </a>
-      </div>
 
       <main className='flex-1 w-full p-4 text-center'>
         {/* Children routes will render inside the Outlet */}
@@ -140,11 +139,11 @@ export default function PageContainer() {
         <div className='flex flex-col md:flex-row items-center gap-4'>
           <div>
             {/* <h2>Contact</h2> */}
-            <div className='flex items-center justify-center gap-2 hover:text-ub-dark'>
+            <div className='flex items-center justify-center gap-2'>
               <FaPhone className='text-ub-orange' />
               (414)-988-0355
             </div>
-            <div className='flex items-center justify-center gap-2 hover:text-ub-dark'>
+            <div className='flex items-center justify-center gap-2'>
               <FaEnvelope className='text-ub-orange' />
               connect@unclebucksonthird.com
             </div>
@@ -161,7 +160,7 @@ export default function PageContainer() {
                 href='https://www.google.com/maps/dir/?api=1&destination=1125+N+Doctor+M.L.K+Jr.+Drive,+Milwaukee,+WI+53203'
                 target='_blank'
                 rel='noopener noreferrer'
-                className=' hover:text-ub-dark underline'
+                className=' hover:text-ub-orange underline'
               >
                 Get Directions
               </a>
