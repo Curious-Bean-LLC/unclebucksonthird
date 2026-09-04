@@ -1,4 +1,4 @@
 ---
 layout: image
-imageFile: /images/uploads/private-space-3.jpeg
+imageFile: /images/uploads/private-space-1.jpeg
 ---
