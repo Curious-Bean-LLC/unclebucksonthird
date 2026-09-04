@@ -1,8 +1,19 @@
+import ImageGrid from '../components/ImageGrid'
+import { useLoadImages } from '../hooks/useLoadImages'
+
 export default function Reservations() {
+  const { images } = useLoadImages('reservations')
+
   return (
     <div className='flex flex-col items-center gap-8'>
       <h1>Reservations</h1>
       <p>Make a reservation for your next visit!</p>
+
+      {images.length > 0 && (
+        <div className='w-full max-w-4xl px-4'>
+          <ImageGrid images={images} altPrefix='Reservations' />
+        </div>
+      )}
       
       <div className='flex flex-col gap-4'>
         <a

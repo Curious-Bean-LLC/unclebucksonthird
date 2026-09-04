@@ -1,27 +1,12 @@
-import PrivateSpace1 from '/images/private-space-1.jpeg'
-import PrivateSpace2 from '/images/private-space-2.jpeg'
-import PrivateSpace3 from '/images/private-space-3.jpeg'
+import ImageGrid from '../components/ImageGrid'
+import { useLoadImages } from '../hooks/useLoadImages'
 
 export default function PrivateEventsCatering() {
+  const { images } = useLoadImages('catering')
+
   return (
     <div className='flex flex-col items-center gap-15 md:px-15'>
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-2 text-center'>
-        <img
-          src={PrivateSpace1}
-          alt='Private Event Space 1'
-          className='w-full h-auto'
-        />
-        <img
-          src={PrivateSpace2}
-          alt='Private Event Space 2'
-          className='w-full h-auto'
-        />
-        <img
-          src={PrivateSpace3}
-          alt='Private Event Space 3'
-          className='w-full h-auto'
-        />
-      </div>
+      <ImageGrid images={images} altPrefix='Private Event Space' />
 
       <p>
         Let's make it a party to remember! We offer parties that are late-night

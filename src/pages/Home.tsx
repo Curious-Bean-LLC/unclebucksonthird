@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom'
 import HomeVideo from '/videos/home-video.mp4'
-import PrivateSpace1 from '/images/private-space-1.jpeg'
-import PrivateSpace2 from '/images/private-space-2.jpeg'
-import PrivateSpace3 from '/images/private-space-3.jpeg'
+import ImageGrid from '../components/ImageGrid'
+import { useLoadImages } from '../hooks/useLoadImages'
 
 export default function Home() {
+  const { images: homeImages } = useLoadImages('home')
+  const { images: cateringImages } = useLoadImages('catering')
+  const previewCateringImages = cateringImages.slice(0, 3)
+
   return (
     <div key='home-container' className='flex flex-col items-center gap-15'>
       <video src={HomeVideo} autoPlay loop muted className='w-full h-auto' />
@@ -50,29 +53,19 @@ export default function Home() {
         </div>
       </div>
 
+      {homeImages.length > 0 && (
+        <section className='w-full'>
+          <ImageGrid images={homeImages} altPrefix='Home' />
+        </section>
+      )}
+
       <h1>Private Parties, Events + Catering</h1>
       <button className='bg-ub-orange text-ub-white py-4 px-6 rounded hover:bg-ub-dark'>
         <Link to='/private-events-catering' className=''>
           Book Now
         </Link>
       </button>
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-2 text-center'>
-        <img
-          src={PrivateSpace1}
-          alt='Private Event Space 1'
-          className='w-full h-auto'
-        />
-        <img
-          src={PrivateSpace2}
-          alt='Private Event Space 2'
-          className='w-full h-auto'
-        />
-        <img
-          src={PrivateSpace3}
-          alt='Private Event Space 3'
-          className='w-full h-auto'
-        />
-      </div>
+      <ImageGrid images={previewCateringImages} altPrefix='Private Event Space' />
     </div>
   )
 }

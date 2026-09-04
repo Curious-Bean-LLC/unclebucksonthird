@@ -1,5 +1,7 @@
 import matter from 'gray-matter'
 import { useEffect, useState } from 'react'
+import ImageGrid from '../components/ImageGrid'
+import { useLoadImages } from '../hooks/useLoadImages'
 
 interface EventFrontmatter {
   layout: string
@@ -19,6 +21,7 @@ export default function Events() {
   const [recurringEvents, setRecurringEvents] = useState<ParsedEvent[]>([])
   const [onetimeEvents, setOnetimeEvents] = useState<ParsedEvent[]>([])
   const [loading, setLoading] = useState(true)
+  const { images } = useLoadImages('events')
 
   const parseMarkdown = (content: string): ParsedEvent => {
     const { data, content: body } = matter(content)
@@ -216,6 +219,15 @@ export default function Events() {
         <div className='text-center text-gray-600'>
           <p>No events at this time. Check back soon!</p>
         </div>
+      )}
+
+      {images.length > 0 && (
+        <section className='w-full max-w-4xl mt-12'>
+          <h2 className='text-2xl font-bold mb-8 text-ub-orange'>
+            Event Gallery
+          </h2>
+          <ImageGrid images={images} altPrefix='Event' />
+        </section>
       )}
     </div>
   )
