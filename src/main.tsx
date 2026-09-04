@@ -7,6 +7,7 @@ import Admin from './pages/Admin'
 
 // Find the root element in index.html
 const container = document.getElementById('root')
+console.log(container)
 
 // Ensure the container exists before rendering
 if (container) {
