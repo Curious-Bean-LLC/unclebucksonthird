@@ -10,7 +10,10 @@ import { Link, NavLink, Outlet } from 'react-router-dom'
 
 export default function PageContainer() {
   return (
-    <div className='flex flex-col items-center min-h-screen pt-5 gap-10'>
+    <div
+      id='main-content'
+      className='flex flex-col items-center min-h-screen pt-5 gap-10'
+    >
       <div>
         <Link to='/'>
           <img
@@ -21,46 +24,77 @@ export default function PageContainer() {
         </Link>
       </div>
 
-      <nav className='flex flex-col md:flex-row gap-2 md:gap-5 items-center'>
+      <nav
+        id='nav'
+        className='nav flex flex-col md:flex-row gap-2 md:gap-5 items-center'
+      >
         <NavLink
           to='/menu'
           className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
+          style={({ isActive }) => ({
+            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-dark)',
+            fontSize: '1.5rem',
+          })}
         >
           Menu
         </NavLink>
         <NavLink
           to='/beer'
           className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
+          style={({ isActive }) => ({
+            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-dark)',
+            fontSize: '1.5rem',
+          })}
         >
           Beer
         </NavLink>
         <NavLink
           to='/wine'
           className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
+          style={({ isActive }) => ({
+            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-dark)',
+            fontSize: '1.5rem',
+          })}
         >
           Wine
         </NavLink>
         <NavLink
           to='/private-events-catering'
           className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
+          style={({ isActive }) => ({
+            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-dark)',
+            fontSize: '1.5rem',
+          })}
         >
           Private Parties + Catering
         </NavLink>
         <NavLink
           to='/events'
           className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
+          style={({ isActive }) => ({
+            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-dark)',
+            fontSize: '1.5rem',
+          })}
         >
           Events
         </NavLink>
         <NavLink
           to='/reservations'
           className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
+          style={({ isActive }) => ({
+            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-dark)',
+            fontSize: '1.5rem',
+          })}
         >
           Reservations
         </NavLink>
         <NavLink
           to='/about'
           className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
+          style={({ isActive }) => ({
+            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-dark)',
+            fontSize: '1.5rem',
+          })}
         >
           About
         </NavLink>
@@ -70,6 +104,7 @@ export default function PageContainer() {
             target='_blank'
             rel='noopener noreferrer'
             className='text-xl text-ub-orange hover:text-ub-dark'
+            style={{ fontSize: '1.5rem', color: 'var(--color-ub-orange)' }}
           >
             <FaFacebook />
           </a>
@@ -78,6 +113,7 @@ export default function PageContainer() {
             target='_blank'
             rel='noopener noreferrer'
             className='text-xl text-ub-orange hover:text-ub-dark'
+            style={{ fontSize: '1.5rem', color: 'var(--color-ub-orange)' }}
           >
             <FaInstagram />
           </a>
@@ -86,6 +122,7 @@ export default function PageContainer() {
             target='_blank'
             rel='noopener noreferrer'
             className='text-xl text-ub-orange hover:text-ub-dark'
+            style={{ fontSize: '1.5rem', color: 'var(--color-ub-orange)' }}
           >
             <FaYelp />
           </a>
@@ -98,41 +135,13 @@ export default function PageContainer() {
       </main>
 
       <footer className='bg-ub-dark text-ub-white border-t-6 border-ub-orange w-full p-4 text-center flex gap-4 flex-col md:flex-row justify-around items-center text-sm'>
-        {/* <table className='tight-table max-w-sm text-left border-ub-white border-2'>
-          <tr>
-            <th colSpan={2} className='text-center'>
-              <h2>Hours</h2>
-            </th>
-          </tr>
-          <tr>
-            <td className='font-black pr-1'>Monday, Tuesday</td>
-            <td>
-              Open during Fiserv Arena Events or private party requests
-            </td>
-          </tr>
-          <tr>
-            <td className='font-black pr-1'>Wednesday</td>
-            <td>11 AM - 11 PM</td>
-          </tr>
-          <tr>
-            <td className='font-black pr-1'>Thursday</td>
-            <td>11 AM - 11 PM</td>
-          </tr>
-          <tr>
-            <td className='font-black pr-1'>Friday</td>
-            <td>11 AM - 2:30 AM</td>
-          </tr>
-          <tr>
-            <td className='font-black pr-1'>Saturday</td>
-            <td>11 AM - 2:30 AM</td>
-          </tr>
-          <tr>
-            <td className='font-black pr-1'>Sunday</td>
-            <td>11 AM - 11 PM</td>
-          </tr>
-        </table> */}
         <div>
-          <h2 className='text-ub-white'>Uncle Buck's on Third</h2>
+          <h2
+            className='text-ub-white'
+            style={{ color: 'var(--color-ub-white)', fontSize: '2rem' }}
+          >
+            Uncle Buck's on Third
+          </h2>
           {/* <p>Milwaukee, WI</p> */}
         </div>
 
@@ -151,8 +160,12 @@ export default function PageContainer() {
 
           <div className='text-center'>
             {/* <h2>Uncle Bucks</h2> */}
-            <p>1125 N Doctor M.L.K Jr. Drive</p>
-            <p>Milwaukee, WI 53203</p>
+            <p style={{ color: 'var(--color-ub-white)' }}>
+              1125 N Doctor M.L.K Jr. Drive
+            </p>
+            <p style={{ color: 'var(--color-ub-white)' }}>
+              Milwaukee, WI 53203
+            </p>
             <div className='text-white flex items-center justify-center gap-2'>
               {' '}
               <FaSearchLocation className='text-ub-orange' />
@@ -161,6 +174,7 @@ export default function PageContainer() {
                 target='_blank'
                 rel='noopener noreferrer'
                 className=' hover:text-ub-orange underline'
+                style={{ color: 'var(--color-ub-white)' }}
               >
                 Get Directions
               </a>

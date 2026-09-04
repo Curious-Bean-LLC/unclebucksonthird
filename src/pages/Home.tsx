@@ -60,12 +60,18 @@ export default function Home() {
       )}
 
       <h1>Private Parties, Events + Catering</h1>
-      <button className='bg-ub-orange text-ub-white py-4 px-6 rounded hover:bg-ub-dark'>
+      <button
+        className='bg-ub-orange text-ub-white py-4 px-6 rounded hover:bg-ub-dark'
+        style={{ color: 'var(--color-ub-white)' }}
+      >
         <Link to='/private-events-catering' className=''>
           Book Now
         </Link>
       </button>
-      <ImageGrid images={previewCateringImages} altPrefix='Private Event Space' />
+      <ImageGrid
+        images={previewCateringImages}
+        altPrefix='Private Event Space'
+      />
     </div>
   )
 }
