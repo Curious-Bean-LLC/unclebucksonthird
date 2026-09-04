@@ -20,5 +20,46 @@
         })
       }
     </script>
+
+    <!-- A little help for the Netlify post-processing bots -->
+    <form name="private" netlify netlify-honeypot="bot-field" hidden>
+      <input required type="text" name="name" />
+      <input required type="email" name="email" />
+      <input required type="tel" name="phone" />
+      <input type="text" name="company" />
+      <input required type="date" name="date" />
+      <input required type="time" name="time" />
+      <input type="text" name="duration" />
+      <select required name="occasion">
+        <!-- <option value='anniversary'>Anniversary</option>
+        <option value='baby'>Baby Shower</option>
+        <option value='bachelor'>Bachelor Party</option>
+        <option value='bachelorette'>Bachelorette Party</option>
+        <option value='birthday'>Birthday</option>
+        <option value='bridal'>Bridal Shower</option>
+        <option value='corporate'>Corporate Event</option>
+        <option value='engagement'>Engagement Party</option>
+        <option value='family'>Family Reunion</option>
+        <option value='graduation'>Graduation</option>
+        <option value='holiday'>Holiday Party</option>
+        <option value='other'>Other</option>
+        <option value='quinceanera'>Quinceañera</option>
+        <option value='repast'>Repast/Memorial Service Reception</option>
+        <option value='retirement'>Retirement Party</option>
+        <option value='wedding'>Wedding</option> -->
+      </select>
+
+      <input required type="number" name="guests" />
+      <input required type="number" name="budget" />
+      <textarea name="description"></textarea>
+      <select name="referral">
+        <!-- <option value='search'>Search Engine</option>
+            <option value='social'>Social Media</option>
+            <option value='email'>Email Newsletter</option>
+            <option value='wom'>Word of Mouth</option>
+            <option value='existing'>I'm an existing customer</option>
+            <option value='other'>Other</option> -->
+      </select>
+    </form>
   </body>
 </html>

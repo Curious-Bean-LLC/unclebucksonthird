@@ -1,1 +1,88 @@
 @import 'tailwindcss';
+
+@font-face {
+  font-family: 'Balthazar';
+  src: url('/fonts/Balthazar/Balthazar-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Grenze';
+  src: url('/fonts/Grenze/Grenze-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Sintony';
+  src: url('/fonts/Sintony/Sintony-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@theme {
+  --color-ub-orange: #ee6339;
+  --color-ub-dark: #0e2620;
+  --color-ub-light: #f5f5f5;
+  --color-ub-white: #ffffff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+nav {
+  font-family: 'Grenze', serif;
+  font-size: 2rem;
+}
+
+nav {
+  font-size: 1.5rem;
+}
+
+body {
+  font-family: 'Sintony', sans-serif;
+  font-size: 1rem;
+  color: var(--color-ub-dark);
+}
+
+button {
+  font-family: 'Grenze', serif;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+}
+
+.loose-table {
+  td {
+    padding: 0.25rem;
+  }
+}
+
+.tight-table {
+  td {
+    padding: 0.125rem 0.5rem;
+  }
+}
+
+form {
+  p {
+    text-align: left;
+    padding: 0.5rem 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+    }
+
+    input,
+    textarea,
+    select {
+      color: var(--color-ub-orange);
+      padding: 0.5rem;
+      border: 1px solid var(--color-ub-dark);
+      border-radius: 0.5rem;
+    }
+  }
+}
