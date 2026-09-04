@@ -9,6 +9,9 @@ import Menu from './pages/Menu'
 import PrivateEventsCatering from './pages/PrivateEventsCatering'
 import Reservations from './pages/Reservations'
 import Wine from './pages/Wine'
+import CMS from 'decap-cms-app'
+
+CMS.init()
 
 const router = createBrowserRouter([
   {
@@ -55,22 +58,5 @@ const router = createBrowserRouter([
 function App() {
   return <RouterProvider router={router} />
 }
-
-// function App() {
-//   return (
-//     <BrowserRouter>
-//       <Routes>
-//         <Route path='/' element={<PageContainer key='page-container' />}>
-//           <Route index element={<Home key='home-view' />} />
-//           {/* <Route
-//             path='admin'
-//             element={<Admin key='admin-view' />}
-//             errorElement={<ErrorBoundary />}
-//           /> */}
-//         </Route>
-//       </Routes>
-//     </BrowserRouter>
-//   )
-// }
 
 export default App
