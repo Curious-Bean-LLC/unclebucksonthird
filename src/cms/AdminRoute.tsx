@@ -27,7 +27,7 @@ const cmsConfig: CmsConfig = {
     {
       name: 'main_menu',
       label: 'Main Menu',
-      folder: 'public/_menus/main',
+      folder: 'src/_menus/main',
       create: true,
       slug: '{{slug}}',
       fields: [
@@ -40,7 +40,7 @@ const cmsConfig: CmsConfig = {
     {
       name: 'beer_menu',
       label: 'Beer Menu',
-      folder: 'public/_menus/beer',
+      folder: 'src/_menus/beer',
       create: true,
       slug: '{{slug}}',
       fields: [
@@ -53,7 +53,7 @@ const cmsConfig: CmsConfig = {
     {
       name: 'wine_menu',
       label: 'Wine Menu',
-      folder: 'public/_menus/wine',
+      folder: 'src/_menus/wine',
       create: true,
       slug: '{{slug}}',
       fields: [
@@ -65,7 +65,7 @@ const cmsConfig: CmsConfig = {
     {
       name: 'main_specials',
       label: 'Main Specials',
-      folder: 'public/_menus/specials/main',
+      folder: 'src/_menus/specials/main',
       create: true,
       slug: '{{slug}}',
       fields: [
@@ -84,7 +84,7 @@ const cmsConfig: CmsConfig = {
     {
       name: 'beer_specials',
       label: 'Beer Specials',
-      folder: 'public/_menus/specials/beer',
+      folder: 'src/_menus/specials/beer',
       create: true,
       slug: '{{slug}}',
       fields: [
@@ -103,7 +103,7 @@ const cmsConfig: CmsConfig = {
     {
       name: 'wine_specials',
       label: 'Wine Specials',
-      folder: 'public/_menus/specials/wine',
+      folder: 'src/_menus/specials/wine',
       create: true,
       slug: '{{slug}}',
       fields: [
@@ -122,7 +122,7 @@ const cmsConfig: CmsConfig = {
     {
       name: 'catering_menu',
       label: 'Catering Menu',
-      folder: 'public/_menus/catering',
+      folder: 'src/_menus/catering',
       create: true,
       slug: '{{slug}}',
       fields: [
@@ -135,7 +135,7 @@ const cmsConfig: CmsConfig = {
     {
       name: 'event_onetime',
       label: 'One-Time Event',
-      folder: 'public/_events/onetime',
+      folder: 'src/_events/onetime',
       create: true,
       slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
       fields: [
@@ -149,7 +149,7 @@ const cmsConfig: CmsConfig = {
     {
       name: 'event_recurring',
       label: 'Recurring Event',
-      folder: 'public/_events/recurring',
+      folder: 'src/_events/recurring',
       create: true,
       slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
       fields: [
@@ -170,7 +170,7 @@ const cmsConfig: CmsConfig = {
     {
       name: 'home_images',
       label: 'Home Images',
-      folder: 'public/_images/home',
+      folder: 'src/_images/home',
       create: true,
       slug: '{{slug}}',
       fields: [
@@ -181,7 +181,7 @@ const cmsConfig: CmsConfig = {
     {
       name: 'catering_images',
       label: 'Catering Images',
-      folder: 'public/_images/catering',
+      folder: 'src/_images/catering',
       create: true,
       slug: '{{slug}}',
       fields: [
@@ -192,7 +192,7 @@ const cmsConfig: CmsConfig = {
     {
       name: 'about_images',
       label: 'About Images',
-      folder: 'public/_images/about',
+      folder: 'src/_images/about',
       create: true,
       slug: '{{slug}}',
       fields: [
@@ -203,7 +203,7 @@ const cmsConfig: CmsConfig = {
     {
       name: 'reservations_images',
       label: 'Reservations Images',
-      folder: 'public/_images/reservations',
+      folder: 'src/_images/reservations',
       create: true,
       slug: '{{slug}}',
       fields: [
@@ -214,7 +214,7 @@ const cmsConfig: CmsConfig = {
     {
       name: 'events_images',
       label: 'Events Images',
-      folder: 'public/_images/events',
+      folder: 'src/_images/events',
       create: true,
       slug: '{{slug}}',
       fields: [
