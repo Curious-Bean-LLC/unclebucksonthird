@@ -17,10 +17,23 @@ interface ParsedEvent {
 }
 
 // Simple frontmatter parser that doesn't require Buffer
-function parseFrontmatter(content: string) {
-  const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/)
+function parseFrontmatter(content: unknown) {
+  // Handle if content is an object with a default property (from Vite)
+  let contentString = typeof content === 'string' ? content : ''
+  
+  if (typeof content === 'object' && content !== null && 'default' in content) {
+    contentString = (content as any).default
+  }
+
+  // Ensure we have a string
+  if (typeof contentString !== 'string') {
+    console.warn('Content is not a string:', content)
+    return { data: {}, body: '' }
+  }
+
+  const match = contentString.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/)
   if (!match) {
-    return { data: {}, body: content }
+    return { data: {}, body: contentString }
   }
 
   const frontmatterText = match[1]
