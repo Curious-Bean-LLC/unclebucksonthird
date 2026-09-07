@@ -9,9 +9,17 @@ import Menu from './pages/Menu'
 import PrivateEventsCatering from './pages/PrivateEventsCatering'
 import Reservations from './pages/Reservations'
 import Wine from './pages/Wine'
-import CMS from 'decap-cms-app'
+import { lazy } from 'react'
 
-CMS.init()
+declare global {
+  interface Window {
+    CMS_MANUAL_INIT: boolean
+  }
+}
+
+window.CMS_MANUAL_INIT = true
+
+const AdminRoute = lazy(() => import('./cms/AdminRoute.tsx'))
 
 const router = createBrowserRouter([
   {
@@ -52,6 +60,14 @@ const router = createBrowserRouter([
         element: <About key='about-view' />,
       },
     ],
+  },
+  {
+    path: '/admin/*',
+    element: <AdminRoute key='admin-route' />,
+  },
+  {
+    path: '*',
+    element: <ErrorBoundary />, // TODO maybe this should be its own not found page
   },
 ])
 
