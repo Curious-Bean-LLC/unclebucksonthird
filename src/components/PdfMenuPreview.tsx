@@ -11,6 +11,7 @@ interface PdfMenuPreviewProps {
 
 export default function PdfMenuPreview({ menuFile }: PdfMenuPreviewProps) {
   const [pdfThumbnail, setPdfThumbnail] = useState<string>('')
+  const [pdfError, setPdfError] = useState<string>('')
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   const generatePdfThumbnail = async (
@@ -18,6 +19,14 @@ export default function PdfMenuPreview({ menuFile }: PdfMenuPreviewProps) {
   ): Promise<string | undefined> => {
     try {
       console.log(`Generating thumbnail for: ${pdfUrl}`)
+      
+      // Fetch the PDF to check if it exists before trying to load it
+      const headResponse = await fetch(pdfUrl, { method: 'HEAD' })
+      if (!headResponse.ok) {
+        setPdfError(`PDF file not found at: ${pdfUrl}`)
+        return undefined
+      }
+
       const pdf = await pdfjsLib.getDocument({ url: pdfUrl }).promise
       const page = await pdf.getPage(1)
 
@@ -40,20 +49,25 @@ export default function PdfMenuPreview({ menuFile }: PdfMenuPreviewProps) {
       console.log(`Thumbnail generated successfully for: ${pdfUrl}`)
       return dataUrl
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error)
       console.error(`Failed to generate thumbnail for ${pdfUrl}:`, error)
+      setPdfError(`Unable to load PDF. ${errorMessage}`)
       return undefined
     }
   }
 
   useEffect(() => {
     const loadThumbnail = async () => {
+      setPdfError('')
       const thumbnail = await generatePdfThumbnail(menuFile)
       if (thumbnail) {
         setPdfThumbnail(thumbnail)
       }
     }
 
-    loadThumbnail()
+    if (menuFile) {
+      loadThumbnail()
+    }
   }, [menuFile])
 
   return (
@@ -68,8 +82,10 @@ export default function PdfMenuPreview({ menuFile }: PdfMenuPreviewProps) {
           Open Full Menu
         </a>
       </div>
-      <div className='flex justify-center bg-gray-100 p-4'>
-        {pdfThumbnail ? (
+      <div className='flex justify-center bg-gray-100 p-4 min-h-64'>
+        {pdfError ? (
+          <p className='text-red-600 text-sm text-center'>{pdfError}</p>
+        ) : pdfThumbnail ? (
           <img
             src={pdfThumbnail}
             alt='Menu preview'

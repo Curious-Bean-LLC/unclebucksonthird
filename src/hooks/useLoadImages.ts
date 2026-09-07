@@ -1,4 +1,3 @@
-import matter from 'gray-matter'
 import { useEffect, useState } from 'react'
 
 interface ImageFrontmatter {
@@ -8,6 +7,28 @@ interface ImageFrontmatter {
 
 interface ParsedImage {
   frontmatter: ImageFrontmatter
+}
+
+// Simple frontmatter parser that doesn't require Buffer
+function parseFrontmatter(content: string) {
+  const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/)
+  if (!match) {
+    return { data: {}, body: content }
+  }
+
+  const frontmatterText = match[1]
+  const body = match[2]
+  const data: Record<string, string> = {}
+
+  // Parse YAML-like frontmatter
+  frontmatterText.split('\n').forEach(line => {
+    const [key, ...valueParts] = line.split(':')
+    if (key && valueParts.length > 0) {
+      data[key.trim()] = valueParts.join(':').trim()
+    }
+  })
+
+  return { data, body }
 }
 
 export function useLoadImages(folderPath: string) {
@@ -29,7 +50,7 @@ export function useLoadImages(folderPath: string) {
           // Filter to only include files from the specified folder
           if (path.includes(`_images/${folderPath}/`)) {
             const content = await (importFn as () => Promise<string>)()
-            const { data } = matter(content)
+            const { data } = parseFrontmatter(content)
             
             if (data.imageFile) {
               imageData.push({

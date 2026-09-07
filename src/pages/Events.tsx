@@ -1,4 +1,3 @@
-import matter from 'gray-matter'
 import { useEffect, useState } from 'react'
 import ImageGrid from '../components/ImageGrid'
 import { useLoadImages } from '../hooks/useLoadImages'
@@ -17,6 +16,28 @@ interface ParsedEvent {
   body: string
 }
 
+// Simple frontmatter parser that doesn't require Buffer
+function parseFrontmatter(content: string) {
+  const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/)
+  if (!match) {
+    return { data: {}, body: content }
+  }
+
+  const frontmatterText = match[1]
+  const body = match[2]
+  const data: Record<string, string> = {}
+
+  // Parse YAML-like frontmatter
+  frontmatterText.split('\n').forEach(line => {
+    const [key, ...valueParts] = line.split(':')
+    if (key && valueParts.length > 0) {
+      data[key.trim()] = valueParts.join(':').trim()
+    }
+  })
+
+  return { data, body }
+}
+
 export default function Events() {
   const [recurringEvents, setRecurringEvents] = useState<ParsedEvent[]>([])
   const [onetimeEvents, setOnetimeEvents] = useState<ParsedEvent[]>([])
@@ -24,7 +45,7 @@ export default function Events() {
   const { images } = useLoadImages('events')
 
   const parseMarkdown = (content: string): ParsedEvent => {
-    const { data, content: body } = matter(content)
+    const { data, body } = parseFrontmatter(content)
     return {
       frontmatter: {
         layout: data.layout || '',

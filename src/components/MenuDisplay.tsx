@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import matter from 'gray-matter'
 import PdfMenuPreview from './PdfMenuPreview'
 import SpecialItemCard from './SpecialItemCard'
 
@@ -22,6 +21,28 @@ interface MenuDisplayProps {
   menuTitle: string
 }
 
+// Simple frontmatter parser that doesn't require Buffer
+function parseFrontmatter(content: string) {
+  const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/)
+  if (!match) {
+    return { data: {}, body: content }
+  }
+
+  const frontmatterText = match[1]
+  const body = match[2]
+  const data: Record<string, string> = {}
+
+  // Parse YAML-like frontmatter
+  frontmatterText.split('\n').forEach(line => {
+    const [key, ...valueParts] = line.split(':')
+    if (key && valueParts.length > 0) {
+      data[key.trim()] = valueParts.join(':').trim()
+    }
+  })
+
+  return { data, body }
+}
+
 export default function MenuDisplay({
   menuFolder,
   specialsFolder,
@@ -42,7 +63,7 @@ export default function MenuDisplay({
         for (const [path, importFn] of Object.entries(menuModules)) {
           if (path.includes(menuFolder)) {
             const content = await (importFn as () => Promise<string>)()
-            const { data } = matter(content)
+            const { data } = parseFrontmatter(content)
             if (data.menuFile) {
               setMenuFile(data.menuFile)
             }
@@ -50,19 +71,18 @@ export default function MenuDisplay({
         }
 
         // Load specials
-        const specialsModules = import.meta.glob(
-          '../_menus/specials/*/*.md',
-          { as: 'raw' },
-        )
+        const specialsModules = import.meta.glob('../_menus/specials/*/*.md', {
+          as: 'raw',
+        })
         const specialsData: MenuSpecial[] = []
 
         for (const [path, importFn] of Object.entries(specialsModules)) {
           if (path.includes(`specials/${specialsFolder}`)) {
             const content = await (importFn as () => Promise<string>)()
-            const { data } = matter(content)
+            const { data, body } = parseFrontmatter(content)
             specialsData.push({
-              frontmatter: data as MenuItem,
-              body: content,
+              frontmatter: data as unknown as MenuItem,
+              body: body,
             })
           }
         }
