@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import ImageGrid from '../components/ImageGrid'
+import EventCard from '../components/EventCard'
 import { useLoadImages } from '../hooks/useLoadImages'
 
 interface EventFrontmatter {
@@ -20,7 +21,7 @@ interface ParsedEvent {
 function parseFrontmatter(content: unknown) {
   // Handle if content is an object with a default property (from Vite)
   let contentString = typeof content === 'string' ? content : ''
-  
+
   if (typeof content === 'object' && content !== null && 'default' in content) {
     contentString = (content as any).default
   }
@@ -41,7 +42,7 @@ function parseFrontmatter(content: unknown) {
   const data: Record<string, string> = {}
 
   // Parse YAML-like frontmatter
-  frontmatterText.split('\n').forEach(line => {
+  frontmatterText.split('\n').forEach((line) => {
     const [key, ...valueParts] = line.split(':')
     if (key && valueParts.length > 0) {
       data[key.trim()] = valueParts.join(':').trim()
@@ -76,10 +77,9 @@ export default function Events() {
     const loadEvents = async () => {
       try {
         // Import all recurring events
-        const recurringModules = import.meta.glob(
-          '../_events/recurring/*.md',
-          { as: 'raw' },
-        )
+        const recurringModules = import.meta.glob('../_events/recurring/*.md', {
+          as: 'raw',
+        })
         const recurringData: ParsedEvent[] = []
 
         for (const [, importFn] of Object.entries(recurringModules)) {
@@ -126,24 +126,6 @@ export default function Events() {
     loadEvents()
   }, [])
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    })
-  }
-
-  const formatTime = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true,
-    })
-  }
-
   if (loading) {
     return (
       <div className='flex justify-center items-center min-h-screen'>
@@ -154,53 +136,22 @@ export default function Events() {
 
   return (
     <div className='flex flex-col items-center gap-12 py-8'>
-      <h1>Events</h1>
-
       {/* Ongoing Events Section */}
       {recurringEvents.length > 0 && (
         <section className='w-full max-w-4xl'>
-          <h2 className='text-2xl font-bold mb-8 text-ub-orange'>
-            Ongoing Events
-          </h2>
+          <h2 className='text-2xl font-bold mb-8'>Ongoing Events</h2>
           <div className='flex flex-col gap-8'>
             {recurringEvents.map((event, idx) => (
-              <div
+              <EventCard
                 key={idx}
-                className='border-2 border-ub-orange rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col md:flex-row'
-              >
-                {event.frontmatter.flyer && (
-                  <div className='md:w-2/5 flex-shrink-0'>
-                    <img
-                      src={event.frontmatter.flyer}
-                      alt={event.frontmatter.title}
-                      className='w-full h-full object-contain'
-                    />
-                  </div>
-                )}
-                <div className='p-6 bg-white flex-1 flex flex-col justify-center'>
-                  <h3 className='text-2xl font-bold mb-2 text-ub-orange'>
-                    {event.frontmatter.title}
-                  </h3>
-                  <div className='mb-4 text-sm text-gray-600'>
-                    <p>
-                      <span className='font-semibold'>Frequency:</span>{' '}
-                      {event.frontmatter.recurringFrequency}
-                    </p>
-                    <p>
-                      <span className='font-semibold'>Starts:</span>{' '}
-                      {formatDate(event.frontmatter.date)} at{' '}
-                      {formatTime(event.frontmatter.date)}
-                    </p>
-                    {event.frontmatter.endDate && (
-                      <p>
-                        <span className='font-semibold'>Until:</span>{' '}
-                        {formatDate(event.frontmatter.endDate)}
-                      </p>
-                    )}
-                  </div>
-                  <div className='prose text-gray-700'>{event.body}</div>
-                </div>
-              </div>
+                title={event.frontmatter.title}
+                date={event.frontmatter.date}
+                body={event.body}
+                flyer={event.frontmatter.flyer}
+                isRecurring={true}
+                frequency={event.frontmatter.recurringFrequency}
+                endDate={event.frontmatter.endDate}
+              />
             ))}
           </div>
         </section>
@@ -209,41 +160,17 @@ export default function Events() {
       {/* One-Time Events Section */}
       {onetimeEvents.length > 0 && (
         <section className='w-full max-w-4xl'>
-          <h2 className='text-2xl font-bold mb-8 text-ub-orange'>
-            Upcoming Events
-          </h2>
+          <h2 className='text-2xl font-bold mb-8'>Upcoming Events</h2>
           <div className='flex flex-col gap-8'>
             {onetimeEvents.map((event, idx) => (
-              <div
+              <EventCard
                 key={idx}
-                className='border-2 border-ub-orange rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col md:flex-row'
-              >
-                {event.frontmatter.flyer && (
-                  <div className='md:w-2/5 flex-shrink-0'>
-                    <img
-                      src={event.frontmatter.flyer}
-                      alt={event.frontmatter.title}
-                      className='w-full h-full object-contain'
-                    />
-                  </div>
-                )}
-                <div className='p-6 bg-white flex-1 flex flex-col justify-center'>
-                  <h3 className='text-2xl font-bold mb-2 text-ub-orange'>
-                    {event.frontmatter.title}
-                  </h3>
-                  <div className='mb-4 text-sm text-gray-600'>
-                    <p>
-                      <span className='font-semibold'>Date:</span>{' '}
-                      {formatDate(event.frontmatter.date)}
-                    </p>
-                    <p>
-                      <span className='font-semibold'>Time:</span>{' '}
-                      {formatTime(event.frontmatter.date)}
-                    </p>
-                  </div>
-                  <div className='prose text-gray-700'>{event.body}</div>
-                </div>
-              </div>
+                title={event.frontmatter.title}
+                date={event.frontmatter.date}
+                body={event.body}
+                flyer={event.frontmatter.flyer}
+                isRecurring={false}
+              />
             ))}
           </div>
         </section>
