@@ -18,7 +18,6 @@ interface MenuSpecial {
 interface MenuDisplayProps {
   menuFolder: string
   specialsFolder: string
-  menuTitle: string
 }
 
 // Simple frontmatter parser that doesn't require Buffer
@@ -59,7 +58,6 @@ function parseFrontmatter(content: unknown) {
 export default function MenuDisplay({
   menuFolder,
   specialsFolder,
-  menuTitle,
 }: MenuDisplayProps) {
   const [menuFile, setMenuFile] = useState<string>('')
   const [specials, setSpecials] = useState<MenuSpecial[]>([])
@@ -117,9 +115,6 @@ export default function MenuDisplay({
 
   return (
     <div className='flex flex-col py-8'>
-      {/* commenting out because i don't think i want to display this, it feels redundant to the nav */}
-      {/* <h1 className='text-center mb-8'>{menuTitle}</h1> */}
-
       {/* Two Column Layout: PDF on left, Specials on right */}
       <div className='grid grid-cols-1 md:grid-cols-2 gap-12 px-4'>
         {/* PDF Menu Section - Left Column */}
