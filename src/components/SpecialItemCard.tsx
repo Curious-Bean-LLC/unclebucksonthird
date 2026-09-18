@@ -26,7 +26,7 @@ export default function SpecialItemCard({ item }: SpecialItemCardProps) {
             {item.itemName}
           </h3>
           <p className='text-2xl font-bold text-ub-orange shrink-0'>
-            ${item.itemPrice}
+            ${item.itemPrice.replaceAll('"', '')}
           </p>
         </div>
         <p className='text-[9px] md:text-xs text-gray-700 mb-2 text-left'>
