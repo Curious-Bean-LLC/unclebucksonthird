@@ -1,4 +1,5 @@
 import { FaClock } from 'react-icons/fa'
+import { FaX } from 'react-icons/fa6'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 interface EventCardProps {
@@ -90,12 +91,21 @@ export default function EventCard({
           onClick={(e) => e.stopPropagation()}
         >
           {/* Logo - Always at top */}
-          <div className='flex justify-center pt-4 pb-2 bg-white border-b-2 border-gray-200'>
-            <img
-              src='/images/brand-assets/logo.png'
-              alt='Uncle Bucks Logo'
-              className='w-40 h-auto'
-            />
+          <div className='flex justify-between items-center pt-4 pb-2 px-4 bg-white border-b-2 border-gray-200'>
+            <div className='flex-1 flex justify-center'>
+              <img
+                src='/images/brand-assets/logo.png'
+                alt='Uncle Bucks Logo'
+                className='w-40 h-auto'
+              />
+            </div>
+            <button
+              type='button'
+              onClick={handleClose}
+              className='text-3xl font-bold bg-ub-orange hover:bg-ub-dark rounded transition w-8 h-8 flex items-center justify-center flex-shrink-0'
+            >
+              <FaX />
+            </button>
           </div>
 
           {/* Main content area - Flyer on left, content on right */}
@@ -118,7 +128,7 @@ export default function EventCard({
               <div className='p-6 flex flex-col gap-6'>
                 {/* Date and Body Row */}
                 <div className='flex gap-4'>
-                  <div className='flex flex-col gap-2 flex-shrink-0'>
+                  <div className='flex flex-col gap-2 flex-shrink-0 items-center'>
                     <div>{dateVisual(date)}</div>
                     <div className='text-sm text-ub-dark font-semibold flex gap-2 items-center'>
                       <FaClock className='text-ub-orange' />
@@ -161,7 +171,7 @@ export default function EventCard({
         {/* Row 1, Columns 1-3: Combined container for date + title/body */}
         <div className='col-span-3 flex gap-4'>
           {/* Date and Time */}
-          <div className='flex flex-col gap-2 flex-shrink-0'>
+          <div className='flex flex-col gap-2 flex-shrink-0 items-center'>
             <div>{dateVisual(date)}</div>
             <div className='text-sm text-ub-dark font-semibold flex gap-1 items-center'>
               <FaClock className='text-ub-orange' />
