@@ -1,5 +1,6 @@
 import {
   FaArrowCircleRight,
+  FaBars,
   FaEnvelope,
   FaFacebook,
   FaInstagram,
@@ -7,11 +8,36 @@ import {
   FaSearchLocation,
   FaYelp,
 } from 'react-icons/fa'
-import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom'
+import { useState } from 'react'
 import ContactForm from './components/ContactForm'
 
 export default function PageContainer() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  // Map route paths to display names
+  const getPageName = () => {
+    const path = location.pathname
+    if (path === '/') return ''
+    if (path === '/menu') return 'Menu'
+    if (path === '/beer') return 'Beer'
+    if (path === '/wine') return 'Wine'
+    if (path === '/private-events-catering') return 'Private Parties + Catering'
+    if (path === '/events') return 'Events'
+    if (path === '/reservations') return 'Reservations'
+    if (path === '/about') return 'About'
+    return ''
+  }
+
+  const currentPageName = getPageName()
   return (
     <div
       id='main-content'
@@ -27,9 +53,107 @@ export default function PageContainer() {
         </Link>
       </div>
 
+      {/* Mobile Hamburger Menu */}
+      <div className='md:hidden w-full p-4 bg-ub-dark text-ub-white'>
+        <div className='flex items-center justify-between gap-4'>
+          <div
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className='text-2xl flex items-center gap-4'
+          >
+            <FaBars className='text-ub-orange flex-shrink-0' />
+            <h1 className='text-ub-white'>
+              {currentPageName && `${currentPageName}`}
+              {!currentPageName && 'Home'}
+            </h1>
+          </div>
+          <div className='flex gap-4 items-center justify-center'>
+            <a
+              href='https://facebook.com'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-xl text-ub-orange'
+            >
+              <FaFacebook />
+            </a>
+            <a
+              href='https://instagram.com'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-xl text-ub-orange'
+            >
+              <FaInstagram />
+            </a>
+            <a
+              href='https://yelp.com'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-xl text-ub-orange'
+            >
+              <FaYelp />
+            </a>
+          </div>
+        </div>
+
+        {/* Mobile Menu Dropdown */}
+        {mobileMenuOpen && (
+          <nav className='flex flex-col items-center gap-4 py-4 rounded-lg text-2xl'>
+            <NavLink
+              to='/menu'
+              onClick={() => setMobileMenuOpen(false)}
+              className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
+            >
+              Menu
+            </NavLink>
+            <NavLink
+              to='/beer'
+              onClick={() => setMobileMenuOpen(false)}
+              className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
+            >
+              Beer
+            </NavLink>
+            <NavLink
+              to='/wine'
+              onClick={() => setMobileMenuOpen(false)}
+              className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
+            >
+              Wine
+            </NavLink>
+            <NavLink
+              to='/private-events-catering'
+              onClick={() => setMobileMenuOpen(false)}
+              className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
+            >
+              Private Parties + Catering
+            </NavLink>
+            <NavLink
+              to='/events'
+              onClick={() => setMobileMenuOpen(false)}
+              className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
+            >
+              Events
+            </NavLink>
+            <NavLink
+              to='/reservations'
+              onClick={() => setMobileMenuOpen(false)}
+              className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
+            >
+              Reservations
+            </NavLink>
+            <NavLink
+              to='/about'
+              onClick={() => setMobileMenuOpen(false)}
+              className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
+            >
+              About
+            </NavLink>
+          </nav>
+        )}
+      </div>
+
+      {/* Desktop Navigation */}
       <nav
         id='nav'
-        className='nav flex flex-col md:flex-row gap-2 md:gap-5 items-center'
+        className='nav hidden md:flex flex-col md:flex-row gap-2 md:gap-5 items-center'
       >
         <NavLink
           to='/menu'

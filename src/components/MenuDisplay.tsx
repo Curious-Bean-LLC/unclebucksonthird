@@ -25,7 +25,7 @@ interface MenuDisplayProps {
 function parseFrontmatter(content: unknown) {
   // Handle if content is an object with a default property (from Vite)
   let contentString = typeof content === 'string' ? content : ''
-  
+
   if (typeof content === 'object' && content !== null && 'default' in content) {
     contentString = (content as any).default
   }
@@ -46,7 +46,7 @@ function parseFrontmatter(content: unknown) {
   const data: Record<string, string> = {}
 
   // Parse YAML-like frontmatter
-  frontmatterText.split('\n').forEach(line => {
+  frontmatterText.split('\n').forEach((line) => {
     const [key, ...valueParts] = line.split(':')
     if (key && valueParts.length > 0) {
       data[key.trim()] = valueParts.join(':').trim()
@@ -117,14 +117,15 @@ export default function MenuDisplay({
 
   return (
     <div className='flex flex-col py-8'>
-      <h1 className='text-center mb-8'>{menuTitle}</h1>
+      {/* commenting out because i don't think i want to display this, it feels redundant to the nav */}
+      {/* <h1 className='text-center mb-8'>{menuTitle}</h1> */}
 
       {/* Two Column Layout: PDF on left, Specials on right */}
       <div className='grid grid-cols-1 md:grid-cols-2 gap-12 px-4'>
         {/* PDF Menu Section - Left Column */}
         {menuFile && (
           <section className=''>
-            <h2 className='text-2xl font-bold mb-6 text-ub-orange'>Menu</h2>
+            <h2 className='text-2xl font-bold mb-6'>Menu</h2>
             <PdfMenuPreview menuFile={menuFile} />
           </section>
         )}
@@ -132,9 +133,7 @@ export default function MenuDisplay({
         {/* Specials Section - Right Column */}
         {specials.length > 0 && (
           <section className=''>
-            <h2 className='text-2xl font-bold mb-6 text-ub-orange'>
-              Featured Specials
-            </h2>
+            <h2 className='text-2xl font-bold mb-6'>Featured Specials</h2>
             <div className='space-y-4'>
               {specials.map((special, idx) => (
                 <SpecialItemCard key={idx} item={special.frontmatter} />

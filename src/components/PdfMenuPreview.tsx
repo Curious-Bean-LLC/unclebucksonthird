@@ -19,7 +19,7 @@ export default function PdfMenuPreview({ menuFile }: PdfMenuPreviewProps) {
   ): Promise<string | undefined> => {
     try {
       console.log(`Generating thumbnail for: ${pdfUrl}`)
-      
+
       // Fetch the PDF to check if it exists before trying to load it
       const headResponse = await fetch(pdfUrl, { method: 'HEAD' })
       if (!headResponse.ok) {
@@ -49,7 +49,8 @@ export default function PdfMenuPreview({ menuFile }: PdfMenuPreviewProps) {
       console.log(`Thumbnail generated successfully for: ${pdfUrl}`)
       return dataUrl
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error)
+      const errorMessage =
+        error instanceof Error ? error.message : String(error)
       console.error(`Failed to generate thumbnail for ${pdfUrl}:`, error)
       setPdfError(`Unable to load PDF. ${errorMessage}`)
       return undefined
@@ -71,16 +72,18 @@ export default function PdfMenuPreview({ menuFile }: PdfMenuPreviewProps) {
   }, [menuFile])
 
   return (
-    <div className='bg-white border-2 border-ub-dark overflow-hidden shadow-lg sticky top-8'>
+    <div className='border-2 border-ub-dark overflow-hidden shadow-lg sticky top-8'>
       <div className='p-4 text-center border-b-2 border-ub-dark'>
-        <a
-          href={menuFile}
-          target='_blank'
-          rel='noopener noreferrer'
-          className='w-full h-full inline-block bg-ub-orange text-ub-white py-2 px-6 rounded hover:bg-ub-dark transition'
-        >
-          Open Full Menu
-        </a>
+        <button>
+          <a
+            href={menuFile}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='w-full h-full inline-block py-2 px-6 rounded transition'
+          >
+            Open Full Menu
+          </a>
+        </button>
       </div>
       <div className='flex justify-center bg-gray-100 p-4 min-h-64'>
         {pdfError ? (
