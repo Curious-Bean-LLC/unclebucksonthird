@@ -1,4 +1,5 @@
 import {
+  FaArrowCircleRight,
   FaEnvelope,
   FaFacebook,
   FaInstagram,
@@ -6,9 +7,11 @@ import {
   FaSearchLocation,
   FaYelp,
 } from 'react-icons/fa'
-import { Link, NavLink, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
+import ContactForm from './components/ContactForm'
 
 export default function PageContainer() {
+  const navigate = useNavigate()
   return (
     <div
       id='main-content'
@@ -134,6 +137,8 @@ export default function PageContainer() {
         <Outlet />
       </main>
 
+      <ContactForm />
+
       <footer className='bg-ub-dark text-ub-white border-t-6 border-ub-orange w-full p-4 text-center flex gap-4 flex-col md:flex-row justify-around items-center text-sm'>
         <div>
           <h2
@@ -147,7 +152,6 @@ export default function PageContainer() {
 
         <div className='flex flex-col md:flex-row items-center gap-4'>
           <div>
-            {/* <h2>Contact</h2> */}
             <div className='flex items-center justify-center gap-2'>
               <FaPhone className='text-ub-orange' />
               (414)-988-0355
@@ -155,6 +159,13 @@ export default function PageContainer() {
             <div className='flex items-center justify-center gap-2'>
               <FaEnvelope className='text-ub-orange' />
               connect@unclebucksonthird.com
+            </div>
+            <div
+              onClick={() => navigate('?contact=true')}
+              className='flex items-center justify-center gap-2 hover:underline hover:pointer transition'
+            >
+              Contact Us
+              <FaArrowCircleRight className='text-ub-orange' />
             </div>
           </div>
 
