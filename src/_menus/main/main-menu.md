@@ -1,6 +1,6 @@
 ---
 layout: menu
-title: main menu
+title: Regular Food Menu
 date: 2026-09-04T09:25:00.000-05:00
-menuFile: /images/uploads/sabrinastangler-resume-2025-08-19.pdf
+menuFile: /images/uploads/ub-menu-8-31-26-chef-jay-fouche.pdf
 ---
