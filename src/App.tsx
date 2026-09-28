@@ -1,15 +1,15 @@
+import { lazy } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ErrorBoundary from './ErrorBoundary'
 import PageContainer from './PageContainer'
-import About from './pages/About'
-import Beer from './pages/Beer'
-import Events from './pages/Events'
-import Home from './pages/Home'
-import Menu from './pages/Menu'
-import PrivateEventsCatering from './pages/PrivateEventsCatering'
-import Reservations from './pages/Reservations'
-import Wine from './pages/Wine'
-import { lazy } from 'react'
+import About from './pages/About.tsx'
+import Drinks from './pages/Drinks.tsx'
+import Events from './pages/Events.tsx'
+import Food from './pages/Food.tsx'
+import Home from './pages/Home.tsx'
+import PrivateEventsCatering from './pages/PrivateEventsCatering.tsx'
+import Reservations from './pages/Reservations.tsx'
+import Specials from './pages/Specials.tsx'
 
 declare global {
   interface Window {
@@ -32,16 +32,16 @@ const router = createBrowserRouter([
         element: <Home key='home-view' />,
       },
       {
-        path: '/menu',
-        element: <Menu key='menu-view' />,
+        path: '/food',
+        element: <Food key='food-view' />,
       },
       {
-        path: '/beer',
-        element: <Beer key='beer-view' />,
+        path: '/drinks',
+        element: <Drinks key='drinks-view' />,
       },
       {
-        path: '/wine',
-        element: <Wine key='wine-view' />,
+        path: '/specials',
+        element: <Specials key='specials-view' />,
       },
       {
         path: '/private-events-catering',

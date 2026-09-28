@@ -35,7 +35,7 @@
   h5,
   h6,
   nav {
-    font-family: 'Grenze', serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 
   h1 {
@@ -60,10 +60,10 @@
   }
 
   button {
+    font-family: 'Sintony', sans-serif;
     border-radius: 0.25rem;
-    background-color: var(--color-ub-orange);
+    background-color: var(--color-ub-dark);
     color: var(--color-ub-white);
-    font-family: 'Grenze', serif;
     font-size: 1.25rem;
     text-transform: uppercase;
   }

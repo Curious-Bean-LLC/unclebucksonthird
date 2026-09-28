@@ -120,7 +120,6 @@ export default function MenuDisplay({
         {/* PDF Menu Section - Left Column */}
         {menuFile && (
           <section className=''>
-            <h2 className='text-2xl font-bold mb-6'>Menu</h2>
             <PdfMenuPreview menuFile={menuFile} />
           </section>
         )}
@@ -128,7 +127,6 @@ export default function MenuDisplay({
         {/* Specials Section - Right Column */}
         {specials.length > 0 && (
           <section className=''>
-            <h2 className='text-2xl font-bold mb-6'>Featured Specials</h2>
             <div className='space-y-4'>
               {specials.map((special, idx) => (
                 <SpecialItemCard key={idx} item={special.frontmatter} />

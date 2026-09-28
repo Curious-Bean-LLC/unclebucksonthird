@@ -72,33 +72,28 @@ export default function PdfMenuPreview({ menuFile }: PdfMenuPreviewProps) {
   }, [menuFile])
 
   return (
-    <div className='border-2 border-ub-dark overflow-hidden shadow-lg sticky top-8'>
-      <div className='p-4 text-center border-b-2 border-ub-dark'>
-        <button>
-          <a
-            href={menuFile}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='w-full h-full inline-block py-2 px-6 rounded transition'
-          >
-            Open Full Menu
-          </a>
-        </button>
-      </div>
-      <div className='flex justify-center bg-gray-100 p-4 min-h-64'>
-        {pdfError ? (
-          <p className='text-red-600 text-sm text-center'>{pdfError}</p>
-        ) : pdfThumbnail ? (
-          <img
-            src={pdfThumbnail}
-            alt='Menu preview'
-            className='max-w-full h-auto'
-          />
-        ) : (
-          <p className='text-gray-500'>Loading PDF preview...</p>
-        )}
-        <canvas ref={canvasRef} className='hidden' />
-      </div>
+    <div className='overflow-hidden sticky top-8'>
+      <a
+        href={menuFile}
+        target='_blank'
+        rel='noopener noreferrer'
+        className='w-full h-full inline-block rounded transition'
+      >
+        <div className='flex justify-center min-h-64'>
+          {pdfError ? (
+            <p className='text-red-600 text-sm text-center'>{pdfError}</p>
+          ) : pdfThumbnail ? (
+            <img
+              src={pdfThumbnail}
+              alt='Menu preview'
+              className='max-w-full h-auto'
+            />
+          ) : (
+            <p className='text-gray-500'>Loading PDF preview...</p>
+          )}
+          <canvas ref={canvasRef} className='hidden' />
+        </div>
+      </a>
     </div>
   )
 }

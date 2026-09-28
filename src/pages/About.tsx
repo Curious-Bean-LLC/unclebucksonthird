@@ -5,8 +5,8 @@ export default function About() {
   const { images } = useLoadImages('about')
 
   return (
-    <div className='flex flex-col items-center gap-12 max-w-4xl mx-auto px-6'>
-      <h1>Uncle Buck's on Third</h1>
+    <div className='flex flex-col items-center gap-12 max-w-4xl mx-auto p-6'>
+      <h2 className='text-2xl font-bold'>Uncle Buck's on Third</h2>
       
       <div className='prose prose-lg text-gray-700 space-y-6'>
         <p>
