@@ -39,7 +39,7 @@ export default function PageContainer() {
     const now = new Date()
     const day = now.getDay() // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
     const hour = now.getHours()
-    const minute = now.getMinutes()
+    // const minute = now.getMinutes()
 
     // Define opening hours for each day
     const hours = {
