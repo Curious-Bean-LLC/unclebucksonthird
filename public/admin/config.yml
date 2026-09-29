@@ -7,9 +7,9 @@ media_folder: 'public/images/uploads' # Media files will be stored in the repo u
 public_folder: '/images/uploads' # The src attribute for uploaded media will begin with /images/uploads
 
 collections:
-  - name: 'main_menu'
-    label: 'Main Menu'
-    folder: 'src/_menus/main'
+  - name: 'menus'
+    label: 'Menus'
+    folder: 'src/_menus'
     create: true
     slug: '{{slug}}'
     fields:
@@ -17,29 +17,39 @@ collections:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Effective Date', name: 'date', widget: 'datetime' }
       - { label: 'Menu File', name: 'menuFile', widget: 'file' }
-  - name: 'beer_menu'
-    label: 'Beer Menu'
-    folder: 'src/_menus/beer'
-    create: true
-    slug: '{{slug}}'
-    fields:
-      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'menu' }
-      - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Effective Date', name: 'date', widget: 'datetime' }
-      - { label: 'Menu File', name: 'menuFile', widget: 'file' }
-  - name: 'wine_menu'
-    label: 'Wine Menu'
-    folder: 'src/_menus/wine'
-    create: true
-    slug: '{{slug}}'
-    fields:
-      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'menu' }
-      - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Effective Date', name: 'date', widget: 'datetime' }
-      - { label: 'Menu File', name: 'menuFile', widget: 'file' }
-  - name: 'main_specials'
-    label: 'Main Specials'
-    folder: 'src/_menus/specials/main'
+  # - name: 'main_menu'
+  #   label: 'Main Menu'
+  #   folder: 'src/_menus/main'
+  #   create: true
+  #   slug: '{{slug}}'
+  #   fields:
+  #     - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'menu' }
+  #     - { label: 'Title', name: 'title', widget: 'string' }
+  #     - { label: 'Effective Date', name: 'date', widget: 'datetime' }
+  #     - { label: 'Menu File', name: 'menuFile', widget: 'file' }
+  # - name: 'beer_menu'
+  #   label: 'Beer Menu'
+  #   folder: 'src/_menus/beer'
+  #   create: true
+  #   slug: '{{slug}}'
+  #   fields:
+  #     - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'menu' }
+  #     - { label: 'Title', name: 'title', widget: 'string' }
+  #     - { label: 'Effective Date', name: 'date', widget: 'datetime' }
+  #     - { label: 'Menu File', name: 'menuFile', widget: 'file' }
+  # - name: 'wine_menu'
+  #   label: 'Wine Menu'
+  #   folder: 'src/_menus/wine'
+  #   create: true
+  #   slug: '{{slug}}'
+  #   fields:
+  #     - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'menu' }
+  #     - { label: 'Title', name: 'title', widget: 'string' }
+  #     - { label: 'Effective Date', name: 'date', widget: 'datetime' }
+  #     - { label: 'Menu File', name: 'menuFile', widget: 'file' }
+  - name: 'specials'
+    label: 'Specials'
+    folder: 'src/_specials'
     create: true
     slug: '{{slug}}'
     fields:
@@ -49,40 +59,52 @@ collections:
       - { label: 'Item Description', name: 'itemDescription', widget: 'string' }
       - { label: 'Item Note', name: 'itemNote', widget: 'string' }
       - { label: 'Item Price', name: 'itemPrice', widget: 'string' }
-  - name: 'beer_specials'
-    label: 'Beer Specials'
-    folder: 'src/_menus/specials/beer'
-    create: true
-    slug: '{{slug}}'
-    fields:
-      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'menu' }
-      - { label: 'Item Name', name: 'itemName', widget: 'string' }
-      - { label: 'Item Image', name: 'itemImage', widget: 'image' }
-      - { label: 'Item Description', name: 'itemDescription', widget: 'string' }
-      - { label: 'Item Note', name: 'itemNote', widget: 'string' }
-      - { label: 'Item Price', name: 'itemPrice', widget: 'string' }
-  - name: 'wine_specials'
-    label: 'Wine Specials'
-    folder: 'src/_menus/specials/wine'
-    create: true
-    slug: '{{slug}}'
-    fields:
-      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'menu' }
-      - { label: 'Item Name', name: 'itemName', widget: 'string' }
-      - { label: 'Item Image', name: 'itemImage', widget: 'image' }
-      - { label: 'Item Description', name: 'itemDescription', widget: 'string' }
-      - { label: 'Item Note', name: 'itemNote', widget: 'string' }
-      - { label: 'Item Price', name: 'itemPrice', widget: 'string' }
-  - name: 'catering_menu'
-    label: 'Catering Menu'
-    folder: 'src/_menus/catering'
-    create: true
-    slug: '{{slug}}'
-    fields:
-      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'menu' }
-      - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Effective Date', name: 'date', widget: 'datetime' }
-      - { label: 'Menu File', name: 'menuFile', widget: 'file' }
+  # - name: 'main_specials'
+  #   label: 'Main Specials'
+  #   folder: 'src/_menus/specials/main'
+  #   create: true
+  #   slug: '{{slug}}'
+  #   fields:
+  #     - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'menu' }
+  #     - { label: 'Item Name', name: 'itemName', widget: 'string' }
+  #     - { label: 'Item Image', name: 'itemImage', widget: 'image' }
+  #     - { label: 'Item Description', name: 'itemDescription', widget: 'string' }
+  #     - { label: 'Item Note', name: 'itemNote', widget: 'string' }
+  #     - { label: 'Item Price', name: 'itemPrice', widget: 'string' }
+  # - name: 'beer_specials'
+  #   label: 'Beer Specials'
+  #   folder: 'src/_menus/specials/beer'
+  #   create: true
+  #   slug: '{{slug}}'
+  #   fields:
+  #     - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'menu' }
+  #     - { label: 'Item Name', name: 'itemName', widget: 'string' }
+  #     - { label: 'Item Image', name: 'itemImage', widget: 'image' }
+  #     - { label: 'Item Description', name: 'itemDescription', widget: 'string' }
+  #     - { label: 'Item Note', name: 'itemNote', widget: 'string' }
+  #     - { label: 'Item Price', name: 'itemPrice', widget: 'string' }
+  # - name: 'wine_specials'
+  #   label: 'Wine Specials'
+  #   folder: 'src/_menus/specials/wine'
+  #   create: true
+  #   slug: '{{slug}}'
+  #   fields:
+  #     - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'menu' }
+  #     - { label: 'Item Name', name: 'itemName', widget: 'string' }
+  #     - { label: 'Item Image', name: 'itemImage', widget: 'image' }
+  #     - { label: 'Item Description', name: 'itemDescription', widget: 'string' }
+  #     - { label: 'Item Note', name: 'itemNote', widget: 'string' }
+  #     - { label: 'Item Price', name: 'itemPrice', widget: 'string' }
+  # - name: 'catering_menu'
+  #   label: 'Catering Menu'
+  #   folder: 'src/_menus/catering'
+  #   create: true
+  #   slug: '{{slug}}'
+  #   fields:
+  #     - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'menu' }
+  #     - { label: 'Title', name: 'title', widget: 'string' }
+  #     - { label: 'Effective Date', name: 'date', widget: 'datetime' }
+  #     - { label: 'Menu File', name: 'menuFile', widget: 'file' }
   - name: 'event_onetime'
     label: 'One-Time Event'
     folder: 'src/_events/onetime'
@@ -112,43 +134,51 @@ collections:
           widget: 'select',
           options: ['Daily', 'Weekly', 'Monthly'],
         }
-  - name: 'home_images'
-    label: 'Home Images'
-    folder: 'src/_images/home'
+  - name: 'images'
+    label: 'Images'
+    folder: 'src/_images'
     create: true
     slug: '{{slug}}'
     fields:
       - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
       - { label: 'Image File', name: 'imageFile', widget: 'file' }
-  - name: 'catering_images'
-    label: 'Catering Images'
-    folder: 'src/_images/catering'
-    create: true
-    slug: '{{slug}}'
-    fields:
-      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
-      - { label: 'Image File', name: 'imageFile', widget: 'file' }
-  - name: 'about_images'
-    label: 'About Images'
-    folder: 'src/_images/about'
-    create: true
-    slug: '{{slug}}'
-    fields:
-      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
-      - { label: 'Image File', name: 'imageFile', widget: 'file' }
-  - name: 'reservations_images'
-    label: 'Reservations Images'
-    folder: 'src/_images/reservations'
-    create: true
-    slug: '{{slug}}'
-    fields:
-      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
-      - { label: 'Image File', name: 'imageFile', widget: 'file' }
-  - name: 'events_images'
-    label: 'Events Images'
-    folder: 'src/_images/events'
-    create: true
-    slug: '{{slug}}'
-    fields:
-      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
-      - { label: 'Image File', name: 'imageFile', widget: 'file' }
+  # - name: 'home_images'
+  #   label: 'Home Images'
+  #   folder: 'src/_images/home'
+  #   create: true
+  #   slug: '{{slug}}'
+  #   fields:
+  #     - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
+  #     - { label: 'Image File', name: 'imageFile', widget: 'file' }
+  # - name: 'catering_images'
+  #   label: 'Catering Images'
+  #   folder: 'src/_images/catering'
+  #   create: true
+  #   slug: '{{slug}}'
+  #   fields:
+  #     - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
+  #     - { label: 'Image File', name: 'imageFile', widget: 'file' }
+  # - name: 'about_images'
+  #   label: 'About Images'
+  #   folder: 'src/_images/about'
+  #   create: true
+  #   slug: '{{slug}}'
+  #   fields:
+  #     - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
+  #     - { label: 'Image File', name: 'imageFile', widget: 'file' }
+  # - name: 'reservations_images'
+  #   label: 'Reservations Images'
+  #   folder: 'src/_images/reservations'
+  #   create: true
+  #   slug: '{{slug}}'
+  #   fields:
+  #     - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
+  #     - { label: 'Image File', name: 'imageFile', widget: 'file' }
+  # - name: 'events_images'
+  #   label: 'Events Images'
+  #   folder: 'src/_images/events'
+  #   create: true
+  #   slug: '{{slug}}'
+  #   fields:
+  #     - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
+  #     - { label: 'Image File', name: 'imageFile', widget: 'file' }
