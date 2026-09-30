@@ -14,7 +14,6 @@ collections:
     slug: '{{slug}}'
     nested: { depth: 100, subfolders: false }
     fields:
-      # - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'menu' }
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Effective Date', name: 'date', widget: 'datetime' }
       - { label: 'Menu File', name: 'menuFile', widget: 'file' }
@@ -26,13 +25,11 @@ collections:
     slug: '{{slug}}'
     nested: { depth: 100, subfolders: false }
     fields:
-      # - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'special' }
       - { label: 'Item Name', name: 'itemName', widget: 'string' }
       - { label: 'Item Image', name: 'itemImage', widget: 'image' }
       - { label: 'Item Description', name: 'itemDescription', widget: 'string' }
       - { label: 'Item Note', name: 'itemNote', widget: 'string' }
       - { label: 'Item Price', name: 'itemPrice', widget: 'number' }
-      - { label: 'Path', name: 'path', widget: 'string' }
     meta: { path: { widget: 'string', label: 'Path' } }
   - name: 'event_onetime'
     label: 'One-Time Event'
@@ -73,8 +70,6 @@ collections:
     preview_path_preserve_slashes: true
     nested: { depth: 100, subfolders: false }
     fields:
-      # - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
       - { label: 'Image Title', name: 'imageTitle', widget: 'string' }
       - { label: 'Image File', name: 'imageFile', widget: 'file' }
-      - { label: 'Path', name: 'path', widget: 'string' }
     meta: { path: { widget: 'string', label: 'Path' } }
