@@ -61,8 +61,7 @@ collections:
       - { label: 'Item Description', name: 'itemDescription', widget: 'string' }
       - { label: 'Item Note', name: 'itemNote', widget: 'string' }
       - { label: 'Item Price', name: 'itemPrice', widget: 'string' }
-      - widget: string
-    meta: { path: { widget: string, label: 'Path' } }
+      - { label: 'Path', name: 'path', widget: 'string' }
   # - name: 'main_specials'
   #   label: 'Main Specials'
   #   folder: 'src/_menus/specials/main'
@@ -150,8 +149,7 @@ collections:
     fields:
       - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
       - { label: 'Image File', name: 'imageFile', widget: 'file' }
-      - widget: string
-    meta: { path: { widget: string, label: 'Path' } }
+      - { label: 'Path', name: 'path', widget: 'string' }
   # - name: 'home_images'
   #   label: 'Home Images'
   #   folder: 'src/_images/home'
