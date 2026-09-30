@@ -144,7 +144,6 @@ collections:
     create: true
     slug: '{{slug}}'
     label_singular: 'Image'
-    create: true
     preview_path: 'images/{{slug}}'
     preview_path_preserve_slashes: true
     nested: { depth: 100, subfolders: false }
