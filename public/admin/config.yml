@@ -72,5 +72,6 @@ collections:
     nested: { depth: 100, subfolders: false }
     meta: { path: { widget: 'string', label: 'Path' } }
     fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Image Title', name: 'imageTitle', widget: 'string' }
       - { label: 'Image File', name: 'imageFile', widget: 'file' }
