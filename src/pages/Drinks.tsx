@@ -5,6 +5,7 @@ export default function Drinks() {
     <>
       <MenuDisplay menuFolder='wine' specialsFolder='wine' />
       <MenuDisplay menuFolder='beer' specialsFolder='beer' />
+      <MenuDisplay menuFolder='cocktails' specialsFolder='cocktails' />
     </>
   )
 }

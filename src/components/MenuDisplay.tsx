@@ -82,13 +82,13 @@ export default function MenuDisplay({
         }
 
         // Load specials
-        const specialsModules = import.meta.glob('../_menus/specials/*/*.md', {
+        const specialsModules = import.meta.glob('../_specials/*/*.md', {
           as: 'raw',
         })
         const specialsData: MenuSpecial[] = []
 
         for (const [path, importFn] of Object.entries(specialsModules)) {
-          if (path.includes(`specials/${specialsFolder}`)) {
+          if (path.includes(`${specialsFolder}`)) {
             const content = await (importFn as () => Promise<string>)()
             const { data, body } = parseFrontmatter(content)
             specialsData.push({
