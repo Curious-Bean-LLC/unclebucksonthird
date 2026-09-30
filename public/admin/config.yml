@@ -31,6 +31,7 @@ collections:
       - { label: 'Item Description', name: 'itemDescription', widget: 'string' }
       - { label: 'Item Note', name: 'itemNote', widget: 'string' }
       - { label: 'Item Price', name: 'itemPrice', widget: 'string' }
+      - { label: 'Path', name: 'path', widget: 'string' }
   - name: 'event_onetime'
     label: 'One-Time Event'
     folder: 'src/_events/onetime'
@@ -65,7 +66,11 @@ collections:
     folder: 'src/_images'
     create: true
     slug: '{{slug}}'
+    label_singular: 'Image'
+    preview_path: 'images/{{slug}}'
+    preview_path_preserve_slashes: true
     nested: { depth: 100, subfolders: false }
     fields:
       - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
       - { label: 'Image File', name: 'imageFile', widget: 'file' }
+      - { label: 'Path', name: 'path', widget: 'string' }
