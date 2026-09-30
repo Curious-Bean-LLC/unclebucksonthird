@@ -16,7 +16,8 @@ const markdownPlugin: Plugin = {
       id.includes('.md') &&
       (id.includes('_events') ||
         id.includes('_images') ||
-        id.includes('_menus'))
+        id.includes('_menus') ||
+        id.includes('_specials'))
     ) {
       // Return markdown file as raw string, not parsed JavaScript
       const filePath = id.split('?')[0]
