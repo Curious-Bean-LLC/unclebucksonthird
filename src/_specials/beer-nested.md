@@ -1,9 +1,8 @@
 ---
-layout: menu
 itemName: nested beer test
 itemImage: /images/uploads/blueberry-beer.jpeg
 itemDescription: nested beer
 itemNote: nested beer
 itemPrice: "1"
-path: beer/
+path: beer/nested
 ---

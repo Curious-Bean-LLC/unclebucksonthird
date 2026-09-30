@@ -1,5 +1,4 @@
 ---
-layout: menu
 itemName: blueberry sour razzle dazzle
 itemImage: /images/uploads/blueberry-beer.jpeg
 itemDescription: a fruity sweet sour
