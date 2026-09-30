@@ -9,29 +9,31 @@ public_folder: '/images/uploads' # The src attribute for uploaded media will beg
 collections:
   - name: 'menus'
     label: 'Menus'
+    label_singular: 'Menu'
     folder: 'src/_menus'
     create: true
     slug: '{{slug}}'
     nested: { depth: 100, subfolders: false }
+    meta: { path: { widget: 'string', label: 'Path' } }
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Effective Date', name: 'date', widget: 'datetime' }
       - { label: 'Menu File', name: 'menuFile', widget: 'file' }
-    meta: { path: { widget: 'string', label: 'Path' } }
   - name: 'specials'
     label: 'Specials / Menu Highlights'
+    label_singular: 'Special / Menu Highlight'
     folder: 'src/_specials'
     create: true
     slug: '{{slug}}'
     nested: { depth: 100, subfolders: false }
-    identifier_field: itemName
+    meta: { path: { widget: 'string', label: 'Path' } }
     fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Item Name', name: 'itemName', widget: 'string' }
       - { label: 'Item Image', name: 'itemImage', widget: 'image' }
       - { label: 'Item Description', name: 'itemDescription', widget: 'string' }
       - { label: 'Item Note', name: 'itemNote', widget: 'string' }
       - { label: 'Item Price', name: 'itemPrice', widget: 'number' }
-    meta: { path: { widget: 'string', label: 'Path' } }
   - name: 'event_onetime'
     label: 'One-Time Event'
     folder: 'src/_events/onetime'
@@ -63,14 +65,12 @@ collections:
         }
   - name: 'images'
     label: 'Images'
+    label_singular: 'Image'
     folder: 'src/_images'
     create: true
     slug: '{{slug}}'
-    label_singular: 'Image'
-    preview_path: 'images/{{slug}}'
-    preview_path_preserve_slashes: true
     nested: { depth: 100, subfolders: false }
+    meta: { path: { widget: 'string', label: 'Path' } }
     fields:
       - { label: 'Image Title', name: 'imageTitle', widget: 'string' }
       - { label: 'Image File', name: 'imageFile', widget: 'file' }
-    meta: { path: { widget: 'string', label: 'Path' } }
