@@ -24,6 +24,7 @@ collections:
     create: true
     slug: '{{slug}}'
     nested: { depth: 100, subfolders: false }
+    identifier_field: itemName
     fields:
       - { label: 'Item Name', name: 'itemName', widget: 'string' }
       - { label: 'Item Image', name: 'itemImage', widget: 'image' }
