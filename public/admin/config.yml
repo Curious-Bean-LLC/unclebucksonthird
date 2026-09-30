@@ -143,7 +143,7 @@ collections:
     folder: 'src/_images'
     create: true
     slug: '{{slug}}'
-    label_singular: 'Page'
+    label_singular: 'Image'
     create: true
     preview_path: 'images/{{slug}}'
     preview_path_preserve_slashes: true
