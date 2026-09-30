@@ -30,7 +30,7 @@ collections:
       - { label: 'Item Image', name: 'itemImage', widget: 'image' }
       - { label: 'Item Description', name: 'itemDescription', widget: 'string' }
       - { label: 'Item Note', name: 'itemNote', widget: 'string' }
-      - { label: 'Item Price', name: 'itemPrice', widget: 'string' }
+      - { label: 'Item Price', name: 'itemPrice', widget: 'number' }
       - { label: 'Path', name: 'path', widget: 'string' }
   - name: 'event_onetime'
     label: 'One-Time Event'
@@ -72,5 +72,6 @@ collections:
     nested: { depth: 100, subfolders: false }
     fields:
       - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
+      - { label: 'Image Title', name: 'imageTitle', widget: 'string' }
       - { label: 'Image File', name: 'imageFile', widget: 'file' }
       - { label: 'Path', name: 'path', widget: 'string' }
