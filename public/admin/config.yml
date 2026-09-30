@@ -12,6 +12,7 @@ collections:
     folder: 'src/_menus'
     create: true
     slug: '{{slug}}'
+    nested: { depth: 100, subfolders: false }
     fields:
       - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'menu' }
       - { label: 'Title', name: 'title', widget: 'string' }
@@ -52,6 +53,7 @@ collections:
     folder: 'src/_specials'
     create: true
     slug: '{{slug}}'
+    nested: { depth: 100, subfolders: false }
     fields:
       - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'menu' }
       - { label: 'Item Name', name: 'itemName', widget: 'string' }
@@ -59,6 +61,8 @@ collections:
       - { label: 'Item Description', name: 'itemDescription', widget: 'string' }
       - { label: 'Item Note', name: 'itemNote', widget: 'string' }
       - { label: 'Item Price', name: 'itemPrice', widget: 'string' }
+      - widget: string
+    meta: { path: { widget: string, label: 'Path' } }
   # - name: 'main_specials'
   #   label: 'Main Specials'
   #   folder: 'src/_menus/specials/main'
@@ -139,9 +143,16 @@ collections:
     folder: 'src/_images'
     create: true
     slug: '{{slug}}'
+    label_singular: 'Page'
+    create: true
+    preview_path: 'images/{{slug}}'
+    preview_path_preserve_slashes: true
+    nested: { depth: 100, subfolders: false }
     fields:
       - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'image' }
       - { label: 'Image File', name: 'imageFile', widget: 'file' }
+      - widget: string
+    meta: { path: { widget: string, label: 'Path' } }
   # - name: 'home_images'
   #   label: 'Home Images'
   #   folder: 'src/_images/home'
