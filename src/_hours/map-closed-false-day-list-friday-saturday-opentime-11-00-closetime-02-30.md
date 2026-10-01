@@ -1,4 +1,5 @@
 ---
+title: fri sat 11-230
 day:
   - Friday
   - Saturday
