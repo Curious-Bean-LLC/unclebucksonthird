@@ -8,6 +8,7 @@ import {
   FaInstagram,
   FaPhone,
   FaSearchLocation,
+  FaTripadvisor,
   FaYelp,
 } from 'react-icons/fa'
 import { FaCircle, FaClock } from 'react-icons/fa6'
@@ -23,6 +24,7 @@ import ContactForm from './components/ContactForm'
 const FACEBOOK = 'https://www.facebook.com/unclebucksonthird'
 const INSTAGRAM = 'https://www.instagram.com/unclebucksonthird'
 const YELP = 'https://www.yelp.com/biz/uncle-bucks-milwaukee'
+const TRIPADVISOR = 'https://www.tripadvisor.com/Restaurant_Review-g60097-d19140560-Reviews-Uncle_Bucks_on_Third-Milwaukee_Wisconsin.html'
 
 export default function PageContainer() {
   const navigate = useNavigate()
@@ -113,6 +115,9 @@ export default function PageContainer() {
               </a>
               <a href={YELP} target='_blank' rel='noopener noreferrer'>
                 <FaYelp />
+              </a>
+              <a href={TRIPADVISOR} target='_blank' rel='noopener noreferrer'>
+                <FaTripadvisor />
               </a>
             </div>
           </div>
