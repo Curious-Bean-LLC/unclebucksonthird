@@ -18,6 +18,11 @@
     "react-icons": "^5.7.0",
     "react-router-dom": "^7.18.3"
   },
+  "overrides": {
+    "react-scroll-sync": {
+      "react-dom": "$react-dom"
+    }
+  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@tailwindcss/vite": "^4.3.3",
