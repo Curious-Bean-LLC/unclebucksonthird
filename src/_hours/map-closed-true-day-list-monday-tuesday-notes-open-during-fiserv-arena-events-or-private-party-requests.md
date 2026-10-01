@@ -1,4 +1,5 @@
 ---
+title: monday tuesday closed
 day:
   - Monday
   - Tuesday
