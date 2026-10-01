@@ -1,3 +1,4 @@
+import ContentBlockDisplay from '../components/ContentBlockDisplay'
 import ImageGrid from '../components/ImageGrid'
 import { useLoadImages } from '../hooks/useLoadImages'
 
@@ -5,20 +6,17 @@ export default function PrivateEventsCatering() {
   const { images } = useLoadImages('catering')
 
   return (
-    <div className='flex flex-col items-center gap-15 md:px-15'>
-      <ImageGrid images={images} altPrefix='Private Event Space' />
+    <div className='flex flex-col items-center gap-8 max-w-4xl mx-auto p-6'>
+      <ContentBlockDisplay folder='private_events' />
 
-      <p>
-        Let's make it a party to remember! We offer parties that are late-night
-        party space reserves to semi-private affairs to grand, 500 people
-        buyouts! Please fill out the form with as much info as possible. Please
-        share the party size, desires, requests and questions. We will reply via
-        email to begin the process. *Please use RESERVATIONS when available to
-        book your table.
-      </p>
+      {images.length > 0 && (
+        <div className='w-full'>
+          <ImageGrid images={images} altPrefix='Private Event Space' />
+        </div>
+      )}
 
       <div>
-        <h1>Schedule a Private Event</h1>
+        <h2>Schedule a Private Event</h2>
         <p>
           Contact us today to learn more about our private event catering
           services and to schedule a consultation.
@@ -29,7 +27,7 @@ export default function PrivateEventsCatering() {
         name='private'
         method='POST'
         data-netlify='true'
-        className='text-left w-full px-10'
+        className='text-left w-full'
       >
         <input type='hidden' name='form-name' value='private' />
         <p>

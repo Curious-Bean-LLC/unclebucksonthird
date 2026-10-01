@@ -129,3 +129,15 @@ collections:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Image Title', name: 'imageTitle', widget: 'string' }
       - { label: 'Image File', name: 'imageFile', widget: 'file' }
+  - name: 'content'
+    label: 'Content'
+    folder: 'src/_content/'
+    create: true
+    slug: '{{slug}}'
+    nested: { depth: 100, subfolders: false }
+    meta: { path: { widget: 'string', label: 'Path' } }
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Order', name: 'order', widget: 'number', hint: 'Display order on the page (lower numbers appear first)' }
+      - { label: 'Image', name: 'image', widget: 'image', required: false }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
