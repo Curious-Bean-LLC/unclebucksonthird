@@ -9,7 +9,7 @@ import Food from './pages/Food.tsx'
 import Home from './pages/Home.tsx'
 import PrivateEventsCatering from './pages/PrivateEventsCatering.tsx'
 import Reservations from './pages/Reservations.tsx'
-import Specials from './pages/Specials.tsx'
+import HappyHour from './pages/HappyHour.tsx'
 
 declare global {
   interface Window {
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/specials',
-        element: <Specials key='specials-view' />,
+        element: <HappyHour key='specials-view' />,
       },
       {
         path: '/private-events-catering',
