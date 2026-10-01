@@ -1,4 +1,5 @@
 ---
+title: wed thur sun 11-11
 day:
   - Wednesday
   - Thursday
