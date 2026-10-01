@@ -94,7 +94,6 @@ collections:
     create: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     fields:
-      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'event' }
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Date', name: 'date', widget: 'datetime' }
       - { label: 'Promo Image', name: 'flyer', widget: 'image' }
@@ -105,7 +104,6 @@ collections:
     create: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     fields:
-      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'event' }
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Initial Date', name: 'date', widget: 'datetime' }
       - { label: 'End Date', name: 'endDate', widget: 'datetime' }
@@ -152,6 +150,7 @@ collections:
     create: true
     slug: '{{slug}}'
     fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
       - {
           label: 'Day',
           name: 'day',
