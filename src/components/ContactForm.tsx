@@ -32,7 +32,7 @@ export default function ContactForm() {
         onClick={(e) => e.stopPropagation()}
       >
         <div className='flex justify-between items-center sticky top-0 bg-white border-b-2 border-ub-orange p-4'>
-          <div className='flex items-center gap-4 flex-shrink-0'>
+          <div className='flex items-center gap-4 shrink-0'>
             <img
               src='/images/brand-assets/logo.png'
               alt='Uncle Bucks Logo'

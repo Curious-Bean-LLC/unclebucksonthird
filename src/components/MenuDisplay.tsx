@@ -145,29 +145,27 @@ export default function MenuDisplay({
             <div className='space-y-4'>
               {/* Weekly Specials */}
               {weeklySpecials.length > 0 && (
-                <div>
-                  <h2 className='text-xl font-bold mb-4'>
-                    {weeklySpecials.length === 1
-                      ? 'Weekly Special'
-                      : 'Weekly Specials'}
-                  </h2>
-                  <div className='space-y-4'>
-                    {weeklySpecials.map((special, idx) => (
-                      <SpecialItemCard key={`weekly-${idx}`} item={special.frontmatter} />
-                    ))}
-                  </div>
+                <div className='space-y-4'>
+                  {weeklySpecials.map((special, idx) => (
+                    <SpecialItemCard
+                      key={`weekly-${idx}`}
+                      item={special.frontmatter}
+                      isWeeklySpecial={true}
+                    />
+                  ))}
                 </div>
               )}
 
               {/* Regular Specials */}
               {regularSpecials.length > 0 && (
-                <div>
-                  <h2 className='text-xl font-bold mb-4'>Featured</h2>
-                  <div className='space-y-4'>
-                    {regularSpecials.map((special, idx) => (
-                      <SpecialItemCard key={`regular-${idx}`} item={special.frontmatter} />
-                    ))}
-                  </div>
+                <div className='space-y-4'>
+                  {regularSpecials.map((special, idx) => (
+                    <SpecialItemCard
+                      key={`regular-${idx}`}
+                      item={special.frontmatter}
+                      isWeeklySpecial={false}
+                    />
+                  ))}
                 </div>
               )}
             </div>

@@ -13,6 +13,7 @@ interface ContentData {
 
 interface ContentBlockDisplayProps {
   folder: 'about' | 'reservations' | 'private_events' | 'home'
+  vibrant?: boolean
 }
 
 // Simple frontmatter parser
@@ -55,7 +56,10 @@ function parseFrontmatter(content: unknown) {
   return { data, body }
 }
 
-export default function ContentBlockDisplay({ folder }: ContentBlockDisplayProps) {
+export default function ContentBlockDisplay({
+  folder,
+  vibrant = true,
+}: ContentBlockDisplayProps) {
   const [contentBlocks, setContentBlocks] = useState<ContentData[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -102,39 +106,89 @@ export default function ContentBlockDisplay({ folder }: ContentBlockDisplayProps
     return <div className='text-center text-gray-600 py-8'>No content available.</div>
   }
 
-  return (
-    <div className='flex flex-col gap-8'>
-      {contentBlocks.map((block, idx) => (
-        <div
-          key={idx}
-          className='flex flex-col md:flex-row gap-6 items-start'
-        >
-          {/* Image - if present */}
-          {block.frontmatter.image && (
-            <div className='shrink-0 w-full md:w-64'>
-              <img
-                src={block.frontmatter.image}
-                alt={block.frontmatter.title}
-                className='w-full h-auto rounded-lg object-cover'
-              />
-            </div>
-          )}
+  if (!vibrant) {
+    // Original simple layout
+    return (
+      <div className='flex flex-col gap-8'>
+        {contentBlocks.map((block, idx) => (
+          <div key={idx} className='flex flex-col md:flex-row gap-6 items-start'>
+            {block.frontmatter.image && (
+              <div className='shrink-0 w-full md:w-64'>
+                <img
+                  src={block.frontmatter.image}
+                  alt={block.frontmatter.title}
+                  className='w-full h-auto rounded-lg object-cover'
+                />
+              </div>
+            )}
 
-          {/* Content */}
-          <div className='flex-1'>
-            <h2>{block.frontmatter.title}</h2>
-            <div className='space-y-4 mt-4'>
-              {block.body.split('\n\n').map((paragraph, pIdx) => (
-                paragraph.trim() && (
-                  <p key={pIdx} className='text-lg leading-relaxed'>
-                    {paragraph.trim()}
-                  </p>
-                )
-              ))}
+            <div className='flex-1'>
+              <h2>{block.frontmatter.title}</h2>
+              <div className='space-y-4 mt-4'>
+                {block.body.split('\n\n').map((paragraph, pIdx) => (
+                  paragraph.trim() && (
+                    <p key={pIdx} className='text-lg leading-relaxed'>
+                      {paragraph.trim()}
+                    </p>
+                  )
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+    )
+  }
+
+  // Vibrant layout with color blocks and alternating positions
+  const colors = ['ub-orange', 'ub-dark']
+
+  return (
+    <div className='flex flex-col gap-0'>
+      {contentBlocks.map((block, idx) => {
+        const colorIndex = idx % 2
+        const bgColor = colors[colorIndex]
+        const imageOnLeft = idx % 2 === 0
+        const bgColorClass =
+          bgColor === 'ub-orange'
+            ? 'bg-ub-orange'
+            : 'bg-ub-dark'
+        const textColorClass = 'text-ub-white'
+
+        return (
+          <div
+            key={idx}
+            className={`flex flex-col ${imageOnLeft ? 'md:flex-row' : 'md:flex-row-reverse'} gap-0`}
+          >
+            {/* Image side */}
+            {block.frontmatter.image && (
+              <div className='w-full md:w-1/2 shrink-0'>
+                <img
+                  src={block.frontmatter.image}
+                  alt={block.frontmatter.title}
+                  className='w-full h-80 md:h-full object-cover'
+                />
+              </div>
+            )}
+
+            {/* Content side with color block */}
+            <div
+              className={`w-full ${block.frontmatter.image ? 'md:w-1/2' : 'md:w-full'} ${bgColorClass} ${textColorClass} p-8 md:p-12 flex flex-col justify-center`}
+            >
+              <h2 className={textColorClass}>{block.frontmatter.title}</h2>
+              <div className='space-y-4 mt-4'>
+                {block.body.split('\n\n').map((paragraph, pIdx) => (
+                  paragraph.trim() && (
+                    <p key={pIdx} className='text-lg leading-relaxed'>
+                      {paragraph.trim()}
+                    </p>
+                  )
+                ))}
+              </div>
+            </div>
+          </div>
+        )
+      })}
     </div>
   )
 }

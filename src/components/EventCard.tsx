@@ -102,7 +102,7 @@ export default function EventCard({
             <button
               type='button'
               onClick={handleClose}
-              className='text-3xl font-bold bg-ub-orange hover:bg-ub-dark rounded transition w-8 h-8 flex items-center justify-center flex-shrink-0'
+              className='text-3xl font-bold bg-ub-orange hover:bg-ub-dark rounded transition w-8 h-8 flex items-center justify-center shrink-0'
             >
               <FaX />
             </button>
@@ -128,7 +128,7 @@ export default function EventCard({
               <div className='p-6 flex flex-col gap-6'>
                 {/* Date and Body Row */}
                 <div className='flex gap-4'>
-                  <div className='flex flex-col gap-2 flex-shrink-0 items-center'>
+                  <div className='flex flex-col gap-2 shrink-0 items-center'>
                     <div>{dateVisual(date)}</div>
                     <div className='text-sm text-ub-dark font-semibold flex gap-2 items-center'>
                       <FaClock className='text-ub-orange' />
@@ -171,7 +171,7 @@ export default function EventCard({
         {/* Row 1, Columns 1-3: Combined container for date + title/body */}
         <div className='col-span-3 flex gap-4'>
           {/* Date and Time */}
-          <div className='flex flex-col gap-2 flex-shrink-0 items-center'>
+          <div className='flex flex-col gap-2 shrink-0 items-center'>
             <div>{dateVisual(date)}</div>
             <div className='text-sm text-ub-dark font-semibold flex gap-1 items-center'>
               <FaClock className='text-ub-orange' />

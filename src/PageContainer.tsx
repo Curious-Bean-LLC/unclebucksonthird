@@ -89,12 +89,12 @@ export default function PageContainer() {
             className='w-60 h-auto'
           />
         </Link>
-        <div className='w-full bg-ub-orange md:bg-transparent text-ub-white md:p-4'>
-          <div className='flex justify-between md:justify-center gap-5'>
+        <div className='w-full bg-ub-orange text-ub-white'>
+          <div className='flex justify-between items-center gap-5 pr-4'>
             <div>
               <button
                 onClick={handleShowHours}
-                className='p-2 px-3 flex items-center gap-2'
+                className='p-2 px-3 flex items-center gap-2 rounded'
                 style={{ backgroundColor: 'var(--color-ub-orange)' }}
               >
                 <FaClock />
@@ -106,7 +106,7 @@ export default function PageContainer() {
                 )}
               </button>
             </div>
-            <div className='flex gap-4 justify-center text-ub-white md:text-ub-dark px-4 pt-3 text-xl'>
+            <div className='flex gap-4 text-ub-white text-2xl'>
               <a href={FACEBOOK} target='_blank' rel='noopener noreferrer'>
                 <FaFacebook />
               </a>
@@ -124,10 +124,10 @@ export default function PageContainer() {
 
           {showHours && (
             <div className='grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-2 text-center p-4'>
-              <div className='text-left text-ub-white md:text-ub-dark '>
+              <div className='text-left text-ub-white'>
                 <table className='loose-table'>
                   <tr>
-                    <td className='font-black text-ub-dark md:text-ub-orange pr-1'>
+                    <td className='font-black text-ub-dark pr-1'>
                       Monday, Tuesday
                     </td>
                     <td>
@@ -135,38 +135,38 @@ export default function PageContainer() {
                     </td>
                   </tr>
                   <tr>
-                    <td className='font-black text-ub-dark md:text-ub-orange pr-1'>
+                    <td className='font-black text-ub-dark pr-1'>
                       Wednesday
                     </td>
                     <td>11 AM - 11 PM</td>
                   </tr>
                   <tr>
-                    <td className='font-black text-ub-dark md:text-ub-orange pr-1'>
+                    <td className='font-black text-ub-dark pr-1'>
                       Thursday
                     </td>
                     <td>11 AM - 11 PM</td>
                   </tr>
                   <tr>
-                    <td className='font-black text-ub-dark md:text-ub-orange pr-1'>
+                    <td className='font-black text-ub-dark pr-1'>
                       Friday
                     </td>
                     <td>11 AM - 2:30 AM</td>
                   </tr>
                   <tr>
-                    <td className='font-black text-ub-dark md:text-ub-orange pr-1'>
+                    <td className='font-black text-ub-dark pr-1'>
                       Saturday
                     </td>
                     <td>11 AM - 2:30 AM</td>
                   </tr>
                   <tr>
-                    <td className='font-black text-ub-dark md:text-ub-orange pr-1'>
+                    <td className='font-black text-ub-dark pr-1'>
                       Sunday
                     </td>
                     <td>11 AM - 11 PM</td>
                   </tr>
                 </table>
               </div>
-              <div className='text-ub-white md:text-ub-dark border-2 border-ub-dark md:border-ub-orange flex flex-col items-center justify-center gap-5 p-5'>
+              <div className='text-ub-white border-2 border-ub-dark flex flex-col items-center justify-center gap-5 p-5'>
                 <p>
                   Please email us at: connect@unclebucksonthird.com for
                   availability during off-business hours
@@ -185,7 +185,7 @@ export default function PageContainer() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className='text-2xl flex items-center gap-4'
           >
-            <FaBars className='text-ub-orange flex-shrink-0' />
+            <FaBars className='text-ub-orange shrink-0' />
             <h1 className='text-ub-white text-center'>
               {currentPageName && `${currentPageName}`}
               {!currentPageName && 'Home'}
@@ -252,79 +252,79 @@ export default function PageContainer() {
       {/* Desktop Navigation */}
       <nav
         id='nav'
-        className='nav hidden md:flex flex-col md:flex-row gap-2 md:gap-3 items-center text-center'
+        className='nav hidden md:flex flex-row gap-3 items-center text-center bg-ub-dark px-8 py-4 justify-center w-full'
       >
         <NavLink
           to='/about'
           className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
           style={({ isActive }) => ({
-            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-dark)',
+            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-white)',
             fontSize: '1.5rem',
           })}
         >
           About
         </NavLink>
-        <FaCircle className='text-ub-orange' size='0.5rem' />
+        <FaCircle className='text-ub-white' size='0.5rem' />
         <NavLink
           to='/food'
           className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
           style={({ isActive }) => ({
-            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-dark)',
+            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-white)',
             fontSize: '1.5rem',
           })}
         >
           Food
         </NavLink>
-        <FaCircle className='text-ub-orange' size='0.5rem' />
+        <FaCircle className='text-ub-white' size='0.5rem' />
         <NavLink
           to='/drinks'
           className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
           style={({ isActive }) => ({
-            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-dark)',
+            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-white)',
             fontSize: '1.5rem',
           })}
         >
           Drinks
         </NavLink>
-        <FaCircle className='text-ub-orange' size='0.5rem' />
+        <FaCircle className='text-ub-white' size='0.5rem' />
         <NavLink
           to='/specials'
           className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
           style={({ isActive }) => ({
-            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-dark)',
+            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-white)',
             fontSize: '1.5rem',
           })}
         >
           Happy Hour
         </NavLink>
-        <FaCircle className='text-ub-orange' size='0.5rem' />
+        <FaCircle className='text-ub-white' size='0.5rem' />
         <NavLink
           to='/events'
           className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
           style={({ isActive }) => ({
-            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-dark)',
+            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-white)',
             fontSize: '1.5rem',
           })}
         >
           Events
         </NavLink>
-        <FaCircle className='text-ub-orange' size='0.5rem' />
+        <FaCircle className='text-ub-white' size='0.5rem' />
         <NavLink
           to='/private-events-catering'
           className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
           style={({ isActive }) => ({
-            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-dark)',
+            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-white)',
             fontSize: '1.5rem',
           })}
         >
           Private Parties
         </NavLink>
-        <FaCircle className='text-ub-orange' size='0.5rem' />
+        <FaCircle className='text-ub-white' size='0.5rem' />
         <NavLink
           to='/reservations'
           className={({ isActive }) => (isActive ? 'text-ub-orange' : '')}
           style={({ isActive }) => ({
-            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-dark)',
+            color: isActive ? 'var(--color-ub-orange)' : 'var(--color-ub-white)',
             fontSize: '1.5rem',
           })}
         >

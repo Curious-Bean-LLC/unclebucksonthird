@@ -59,6 +59,11 @@
     flex-shrink: 0;
   }
 
+  .bg-ub-orange h2::before,
+  .bg-ub-orange h2::after {
+    color: var(--color-ub-dark);
+  }
+
   h3 {
     font-size: 1.5rem;
   }
