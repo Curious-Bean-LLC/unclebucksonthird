@@ -132,14 +132,8 @@ export default function MenuDisplay({
     <div className='flex flex-col py-8'>
       {/* Two Column Layout: PDF on left, Specials on right */}
       <div className='grid grid-cols-1 md:grid-cols-2 gap-12 px-4'>
-        {/* PDF Menu Section - Left Column */}
-        {menuFile && (
-          <section className=''>
-            <PdfMenuPreview menuFile={menuFile} />
-          </section>
-        )}
 
-        {/* Specials Section - Right Column */}
+        {/* Specials Section - Left Column */}
         {(weeklySpecials.length > 0 || regularSpecials.length > 0) && (
           <section className=''>
             <div className='space-y-4'>
@@ -169,6 +163,13 @@ export default function MenuDisplay({
                 </div>
               )}
             </div>
+          </section>
+        )}
+
+        {/* PDF Menu Section - Right Column */}
+        {menuFile && (
+          <section className=''>
+            <PdfMenuPreview menuFile={menuFile} />
           </section>
         )}
 
