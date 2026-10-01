@@ -146,11 +146,11 @@ export default function MenuDisplay({
               {/* Weekly Specials */}
               {weeklySpecials.length > 0 && (
                 <div>
-                  <h3 className='text-xl font-bold mb-4'>
+                  <h2 className='text-xl font-bold mb-4'>
                     {weeklySpecials.length === 1
                       ? 'Weekly Special'
                       : 'Weekly Specials'}
-                  </h3>
+                  </h2>
                   <div className='space-y-4'>
                     {weeklySpecials.map((special, idx) => (
                       <SpecialItemCard key={`weekly-${idx}`} item={special.frontmatter} />
@@ -162,7 +162,7 @@ export default function MenuDisplay({
               {/* Regular Specials */}
               {regularSpecials.length > 0 && (
                 <div>
-                  <h3 className='text-xl font-bold mb-4'>Specials</h3>
+                  <h2 className='text-xl font-bold mb-4'>Featured</h2>
                   <div className='space-y-4'>
                     {regularSpecials.map((special, idx) => (
                       <SpecialItemCard key={`regular-${idx}`} item={special.frontmatter} />

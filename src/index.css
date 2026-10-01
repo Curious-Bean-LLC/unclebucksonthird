@@ -44,6 +44,18 @@
 
   h2 {
     font-size: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  h2::before,
+  h2::after {
+    content: '●';
+    color: var(--color-ub-orange);
+    font-size: 1rem;
+    flex-shrink: 0;
   }
 
   h3 {
