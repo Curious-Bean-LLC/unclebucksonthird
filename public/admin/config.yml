@@ -21,6 +21,7 @@ collections:
           label: 'Effective Date',
           name: 'date',
           widget: 'datetime',
+          hint: '24-hr time',
           date_format: 'YYYY-MM-DD',
           time_format: false,
           default: '{{now}}',
@@ -74,7 +75,8 @@ collections:
       - {
           label: 'Start Time',
           name: 'startTime',
-          widget: 'time',
+          widget: 'datetime',
+          hint: '24-hr time',
           date_format: false,
           time_format: 'HH:mm',
           required: false,
@@ -82,7 +84,8 @@ collections:
       - {
           label: 'End Time',
           name: 'endTime',
-          widget: 'time',
+          widget: 'datetime',
+          hint: '24-hr time',
           date_format: false,
           time_format: 'HH:mm',
           required: false,
@@ -138,6 +141,49 @@ collections:
     meta: { path: { widget: 'string', label: 'Path' } }
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Order', name: 'order', widget: 'number', hint: 'Display order on the page (lower numbers appear first)' }
+      - {
+          label: 'Order',
+          name: 'order',
+          widget: 'number',
+          hint: 'Display order on the page (lower numbers appear first)',
+        }
       - { label: 'Image', name: 'image', widget: 'image', required: false }
       - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'hours'
+    label: 'Hours'
+    folder: 'src/_hours'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - {
+          label: 'Day',
+          name: 'day',
+          widget: 'select',
+          multiple: true,
+          options:
+            [
+              'Monday',
+              'Tuesday',
+              'Wednesday',
+              'Thursday',
+              'Friday',
+              'Saturday',
+              'Sunday',
+            ],
+        }
+      - {
+          label: 'Open Time',
+          name: 'openTime',
+          widget: 'datetime',
+          hint: '24-hr time',
+          date_format: false,
+          time_format: 'HH:mm',
+        }
+      - {
+          label: 'Close Time',
+          name: 'closeTime',
+          widget: 'datetime',
+          hint: '24-hr time',
+          date_format: false,
+          time_format: 'HH:mm',
+        }
