@@ -20,21 +20,21 @@ collections:
       - { label: 'Effective Date', name: 'date', widget: 'datetime' }
       - { label: 'Menu File', name: 'menuFile', widget: 'file' }
   - name: 'specials'
-    label: 'Specials / Menu Highlights'
-    label_singular: 'Special / Menu Highlight'
+    label: 'Featured Menu Items'
+    label_singular: 'Featured Menu Item'
     folder: 'src/_specials'
     create: true
-    slug: '{{title} + {isWeeklySpecial ? " (WEEKLY SPECIAL)" : "" }}'
+    slug: '{{slug}}'
     nested: { depth: 100, subfolders: false }
     meta: { path: { widget: 'string', label: 'Path' } }
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Weekly Special?', name: 'isWeeklySpecial', widget: 'boolean' }
       - { label: 'Item Name', name: 'itemName', widget: 'string' }
       - { label: 'Item Image', name: 'itemImage', widget: 'image' }
       - { label: 'Item Description', name: 'itemDescription', widget: 'string' }
       - { label: 'Item Note', name: 'itemNote', widget: 'string' }
       - { label: 'Item Price', name: 'itemPrice', widget: 'number' }
-      - { label: 'Weekly Special?', name: 'isWeeklySpecial', widget: 'boolean' }
   - name: 'event_onetime'
     label: 'One-Time Event'
     folder: 'src/_events/onetime'

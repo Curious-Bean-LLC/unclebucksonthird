@@ -12,7 +12,7 @@ interface SpecialItemCardProps {
 
 export default function SpecialItemCard({ item }: SpecialItemCardProps) {
   return (
-    <div className='overflow-hidden flex flex-row items-start gap-4'>
+    <div className='overflow-hidden flex flex-col md:flex-row items-center gap-4'>
       {item.itemImage && (
         <img
           src={item.itemImage}
@@ -20,17 +20,17 @@ export default function SpecialItemCard({ item }: SpecialItemCardProps) {
           className='w-40 h-40 object-cover shrink-0'
         />
       )}
-      <div className='p-4 flex flex-col flex-1'>
+      <div className='flex flex-col flex-1'>
         <div className='flex flex-row items-center justify-between gap-4 mb-2'>
-          <h3 className='text-lg font-bold text-ub-orange text-left'>
+          <h3 className='text-lg font-bold text-ub-orange text-left capitalize'>
             {item.itemName}
           </h3>
-          <p className='text-2xl font-bold text-ub-orange shrink-0'>
-            ${item.itemPrice.replaceAll('"', '')}
-          </p>
+          <h3 className='text-2xl font-bold text-ub-dark shrink-0'>
+            {item.itemPrice}
+          </h3>
         </div>
         <p className='text-[9px] md:text-xs text-gray-700 mb-2 text-left'>
-          {item.itemDescription}
+          {item.itemDescription.replaceAll('"', '')}
         </p>
         {item.itemNote && (
           <p className='text-[9px] md:text-xs text-gray-600 italic text-left'>

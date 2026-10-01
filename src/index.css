@@ -54,13 +54,12 @@
   div,
   span,
   p {
-    font-family: 'Sintony', sans-serif;
-    /* font-size: 1rem; */
-    /* color: var(--color-ub-dark); */
+    font-family: 'Georgia', 'Times New Roman', Times, serif;
+    font-size: 1rem;
   }
 
   button {
-    font-family: 'Sintony', sans-serif;
+    font-family: 'Georgia', 'Times New Roman', Times, serif;
     border-radius: 0.25rem;
     background-color: var(--color-ub-dark);
     color: var(--color-ub-white);
