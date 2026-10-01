@@ -21,7 +21,6 @@ collections:
           label: 'Effective Date',
           name: 'date',
           widget: 'datetime',
-          hint: '24-hr time',
           date_format: 'YYYY-MM-DD',
           time_format: false,
           default: '{{now}}',
@@ -76,7 +75,6 @@ collections:
           label: 'Start Time',
           name: 'startTime',
           widget: 'datetime',
-          hint: '24-hr time',
           date_format: false,
           time_format: 'HH:mm',
           required: false,
@@ -85,7 +83,6 @@ collections:
           label: 'End Time',
           name: 'endTime',
           widget: 'datetime',
-          hint: '24-hr time',
           date_format: false,
           time_format: 'HH:mm',
           required: false,
@@ -175,15 +172,17 @@ collections:
           label: 'Open Time',
           name: 'openTime',
           widget: 'datetime',
-          hint: '24-hr time',
           date_format: false,
           time_format: 'HH:mm',
+          required: false,
         }
       - {
           label: 'Close Time',
           name: 'closeTime',
           widget: 'datetime',
-          hint: '24-hr time',
           date_format: false,
           time_format: 'HH:mm',
+          required: false,
         }
+      - { label: 'Closed', name: 'closed', widget: 'boolean', default: false }
+      - { label: 'Notes', name: 'notes', widget: 'string', required: false }
