@@ -24,7 +24,7 @@ collections:
     label_singular: 'Special / Menu Highlight'
     folder: 'src/_specials'
     create: true
-    slug: '{{slug}}'
+    slug: '{{title} + {isWeeklySpecial ? " (WEEKLY SPECIAL)" : "" }}'
     nested: { depth: 100, subfolders: false }
     meta: { path: { widget: 'string', label: 'Path' } }
     fields:
@@ -34,6 +34,7 @@ collections:
       - { label: 'Item Description', name: 'itemDescription', widget: 'string' }
       - { label: 'Item Note', name: 'itemNote', widget: 'string' }
       - { label: 'Item Price', name: 'itemPrice', widget: 'number' }
+      - { label: 'Weekly Special?', name: 'isWeeklySpecial', widget: 'boolean' }
   - name: 'event_onetime'
     label: 'One-Time Event'
     folder: 'src/_events/onetime'

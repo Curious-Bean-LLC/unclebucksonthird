@@ -8,6 +8,7 @@ interface MenuItem {
   itemDescription: string
   itemNote?: string
   itemPrice: string
+  isWeeklySpecial?: string | boolean
 }
 
 interface MenuSpecial {
@@ -60,7 +61,8 @@ export default function MenuDisplay({
   specialsFolder,
 }: MenuDisplayProps) {
   const [menuFile, setMenuFile] = useState<string>('')
-  const [specials, setSpecials] = useState<MenuSpecial[]>([])
+  const [weeklySpecials, setWeeklySpecials] = useState<MenuSpecial[]>([])
+  const [regularSpecials, setRegularSpecials] = useState<MenuSpecial[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -98,7 +100,20 @@ export default function MenuDisplay({
           }
         }
 
-        setSpecials(specialsData)
+        // Separate weekly specials from regular specials
+        const weekly = specialsData.filter(
+          (special) =>
+            special.frontmatter.isWeeklySpecial === 'true' ||
+            special.frontmatter.isWeeklySpecial === true
+        )
+        const regular = specialsData.filter(
+          (special) =>
+            special.frontmatter.isWeeklySpecial !== 'true' &&
+            special.frontmatter.isWeeklySpecial !== true
+        )
+
+        setWeeklySpecials(weekly)
+        setRegularSpecials(regular)
       } catch (error) {
         console.error('Error loading menu:', error)
       } finally {
@@ -125,21 +140,47 @@ export default function MenuDisplay({
         )}
 
         {/* Specials Section - Right Column */}
-        {specials.length > 0 && (
+        {(weeklySpecials.length > 0 || regularSpecials.length > 0) && (
           <section className=''>
             <div className='space-y-4'>
-              {specials.map((special, idx) => (
-                <SpecialItemCard key={idx} item={special.frontmatter} />
-              ))}
+              {/* Weekly Specials */}
+              {weeklySpecials.length > 0 && (
+                <div>
+                  <h3 className='text-xl font-bold mb-4'>
+                    {weeklySpecials.length === 1
+                      ? 'Weekly Special'
+                      : 'Weekly Specials'}
+                  </h3>
+                  <div className='space-y-4'>
+                    {weeklySpecials.map((special, idx) => (
+                      <SpecialItemCard key={`weekly-${idx}`} item={special.frontmatter} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Regular Specials */}
+              {regularSpecials.length > 0 && (
+                <div>
+                  <h3 className='text-xl font-bold mb-4'>Specials</h3>
+                  <div className='space-y-4'>
+                    {regularSpecials.map((special, idx) => (
+                      <SpecialItemCard key={`regular-${idx}`} item={special.frontmatter} />
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </section>
         )}
 
-        {specials.length === 0 && !menuFile && (
-          <div className='text-center text-gray-600 md:col-span-2'>
-            <p>No menu data available.</p>
-          </div>
-        )}
+        {weeklySpecials.length === 0 &&
+          regularSpecials.length === 0 &&
+          !menuFile && (
+            <div className='text-center text-gray-600 md:col-span-2'>
+              <p>No menu data available.</p>
+            </div>
+          )}
       </div>
     </div>
   )
