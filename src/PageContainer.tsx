@@ -156,14 +156,60 @@ export default function PageContainer() {
     if (!todayEntry) return false
     if (todayEntry.closed) return false
 
-    // Parse times
-    const [openHour, openMin] = todayEntry.openTime.split(':').map(Number)
-    const [closeHour, closeMin] = todayEntry.closeTime.split(':').map(Number)
-    const openTotalMin = openHour * 60 + openMin
-    const closeTotalMin = closeHour * 60 + closeMin
+    // Parse times - handle both 24-hour and 12-hour (AM/PM) formats
+    const parseTime = (timeStr: string): { hour: number; min: number } => {
+      console.log('Parsing time:', timeStr)
+      
+      let time = timeStr.trim()
+      let hour = 0
+      let min = 0
+      
+      // Check for AM/PM format
+      const amPmMatch = time.match(/(\d{1,2}):(\d{2})\s*(AM|PM|am|pm)/i)
+      if (amPmMatch) {
+        hour = parseInt(amPmMatch[1])
+        min = parseInt(amPmMatch[2])
+        const period = amPmMatch[3].toUpperCase()
+        
+        // Convert to 24-hour format
+        if (period === 'PM' && hour !== 12) {
+          hour += 12
+        } else if (period === 'AM' && hour === 12) {
+          hour = 0
+        }
+      } else {
+        // Assume 24-hour format
+        const timeParts = time.split(':')
+        hour = parseInt(timeParts[0])
+        min = parseInt(timeParts[1] || '0')
+      }
+      
+      return { hour, min }
+    }
+
+    const openTime = parseTime(todayEntry.openTime)
+    const closeTime = parseTime(todayEntry.closeTime)
+    
+    console.log('Today:', dayName, 'Open:', openTime, 'Close:', closeTime, 'Current:', { hour: currentHour, min: currentMinute })
+    
+    const openTotalMin = openTime.hour * 60 + openTime.min
+    const closeTotalMin = closeTime.hour * 60 + closeTime.min
     const currentTotalMin = currentHour * 60 + currentMinute
 
-    return currentTotalMin >= openTotalMin && currentTotalMin < closeTotalMin
+    // Handle midnight wraparound: if close time is before open time, restaurant closes next day
+    let isOpen: boolean
+    if (closeTotalMin < openTotalMin) {
+      // Crosses midnight (e.g., 11 PM to 2:30 AM)
+      // Open if: current >= open time OR current < close time
+      isOpen = currentTotalMin >= openTotalMin || currentTotalMin < closeTotalMin
+    } else {
+      // Same day (e.g., 11 AM to 11 PM)
+      // Open if: current >= open time AND current < close time
+      isOpen = currentTotalMin >= openTotalMin && currentTotalMin < closeTotalMin
+    }
+    
+    console.log('Is open:', isOpen, '(closeTotalMin < openTotalMin?', closeTotalMin < openTotalMin, ')')
+    return isOpen
   }, [hoursLoading, hoursData])
 
   // Map route paths to display names
