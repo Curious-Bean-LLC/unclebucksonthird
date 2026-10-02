@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
   FaArrowCircleRight,
   FaBars,
@@ -21,6 +21,71 @@ import {
 } from 'react-router-dom'
 import ContactForm from './components/ContactForm'
 
+interface HourEntry {
+  title: string
+  day: string[]
+  openTime: string
+  closeTime: string
+  closed: boolean
+  notes?: string
+}
+
+function parseHoursFrontmatter(content: unknown) {
+  let contentString = typeof content === 'string' ? content : ''
+
+  if (typeof content === 'object' && content !== null && 'default' in content) {
+    contentString = (content as any).default
+  }
+
+  if (typeof contentString !== 'string') {
+    return { data: {} as HourEntry, body: '' }
+  }
+
+  const match = contentString.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/)
+  if (!match) {
+    return { data: {} as HourEntry, body: contentString }
+  }
+
+  const frontmatterText = match[1]
+  const body = match[2]
+  const data: any = {}
+
+  const lines = frontmatterText.split('\n')
+  let i = 0
+  while (i < lines.length) {
+    const line = lines[i]
+    const colonIdx = line.indexOf(':')
+    
+    if (colonIdx === -1) {
+      i++
+      continue
+    }
+
+    const key = line.substring(0, colonIdx).trim()
+    let value = line.substring(colonIdx + 1).trim()
+
+    if (key === 'day' && value === '') {
+      // Handle array format
+      const dayArray = []
+      i++
+      while (i < lines.length && lines[i].startsWith('  - ')) {
+        dayArray.push(lines[i].substring(4).trim())
+        i++
+      }
+      data[key] = dayArray
+      continue
+    } else if (value === 'true' || value === 'false') {
+      data[key] = value === 'true'
+    } else if (value) {
+      data[key] = value
+    }
+
+    i++
+  }
+
+  return { data, body }
+}
+
 const FACEBOOK = 'https://www.facebook.com/unclebucksonthird'
 const INSTAGRAM = 'https://www.instagram.com/unclebucksonthird'
 const YELP = 'https://www.yelp.com/biz/uncle-bucks-milwaukee'
@@ -31,35 +96,75 @@ export default function PageContainer() {
   const location = useLocation()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [showHours, setShowHours] = useState(false)
+  const [hoursData, setHoursData] = useState<HourEntry[]>([])
+  const [hoursLoading, setHoursLoading] = useState(true)
 
   const handleShowHours = () => {
     setShowHours(!showHours)
     console.log(showHours)
   }
 
-  const isOpenNow = useMemo(() => {
-    const now = new Date()
-    const day = now.getDay() // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-    const hour = now.getHours()
-    // const minute = now.getMinutes()
+  useEffect(() => {
+    const loadHours = async () => {
+      try {
+        const modules = import.meta.glob('./_hours/*.md', {
+          as: 'raw',
+        })
+        console.log('Hours modules found:', Object.keys(modules))
+        const hours: HourEntry[] = []
 
-    // Define opening hours for each day
-    const hours = {
-      1: { open: 0, close: 0 }, // Monday: Open during Fiserv Arena Events or private party requests
-      2: { open: 0, close: 0 }, // Tuesday: Open during Fiserv Arena Events or private party requests
-      3: { open: 11, close: 23 }, // Wednesday: 11 AM - 11 PM
-      4: { open: 11, close: 23 }, // Thursday: 11 AM - 11 PM
-      5: { open: 11, close: 23 }, // Friday: 11 AM - 11 PM
-      6: { open: 11, close: 23 }, // Saturday: 11 AM - 11 PM
-      0: { open: 11, close: 23 }, // Sunday: 11 AM - 11 PM
+        for (const [path, importFn] of Object.entries(modules)) {
+          const content = await (importFn as () => Promise<string>)()
+          console.log('Raw content from', path, ':', content)
+          const { data } = parseHoursFrontmatter(content)
+          console.log('Parsed data from', path, ':', data)
+          if (data.day) {
+            hours.push(data)
+          }
+        }
+
+        console.log('Final hours array:', hours)
+        setHoursData(hours)
+      } catch (error) {
+        console.error('Error loading hours:', error)
+      } finally {
+        setHoursLoading(false)
+      }
     }
 
-    const todayHours = (hours as any)[day]
-    if (todayHours.open === 0 && todayHours.close === 0) {
-      return false // Open during events or private party requests
-    }
-    return hour >= todayHours.open && hour < todayHours.close
+    loadHours()
   }, [])
+
+  const isOpenNow = useMemo(() => {
+    if (hoursLoading || hoursData.length === 0) return false
+
+    const now = new Date()
+    const dayName = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ][now.getDay()]
+    const currentHour = now.getHours()
+    const currentMinute = now.getMinutes()
+
+    // Find the hours entry for today
+    const todayEntry = hoursData.find((entry) => entry.day.includes(dayName))
+    if (!todayEntry) return false
+    if (todayEntry.closed) return false
+
+    // Parse times
+    const [openHour, openMin] = todayEntry.openTime.split(':').map(Number)
+    const [closeHour, closeMin] = todayEntry.closeTime.split(':').map(Number)
+    const openTotalMin = openHour * 60 + openMin
+    const closeTotalMin = closeHour * 60 + closeMin
+    const currentTotalMin = currentHour * 60 + currentMinute
+
+    return currentTotalMin >= openTotalMin && currentTotalMin < closeTotalMin
+  }, [hoursLoading, hoursData])
 
   // Map route paths to display names
   const getPageName = () => {
@@ -126,44 +231,29 @@ export default function PageContainer() {
             <div className='grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-2 text-center p-4'>
               <div className='text-left text-ub-white'>
                 <table className='loose-table'>
-                  <tr>
-                    <td className='font-black text-ub-dark pr-1'>
-                      Monday, Tuesday
-                    </td>
-                    <td>
-                      Open during Fiserv Arena Events or private party requests
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className='font-black text-ub-dark pr-1'>
-                      Wednesday
-                    </td>
-                    <td>11 AM - 11 PM</td>
-                  </tr>
-                  <tr>
-                    <td className='font-black text-ub-dark pr-1'>
-                      Thursday
-                    </td>
-                    <td>11 AM - 11 PM</td>
-                  </tr>
-                  <tr>
-                    <td className='font-black text-ub-dark pr-1'>
-                      Friday
-                    </td>
-                    <td>11 AM - 2:30 AM</td>
-                  </tr>
-                  <tr>
-                    <td className='font-black text-ub-dark pr-1'>
-                      Saturday
-                    </td>
-                    <td>11 AM - 2:30 AM</td>
-                  </tr>
-                  <tr>
-                    <td className='font-black text-ub-dark pr-1'>
-                      Sunday
-                    </td>
-                    <td>11 AM - 11 PM</td>
-                  </tr>
+                  <tbody>
+                    {hoursData.map((entry, idx) => {
+                      const displayDays = entry.day.join(', ')
+                      const displayHours = entry.closed
+                        ? entry.notes || 'Closed'
+                        : `${entry.openTime} - ${entry.closeTime}`.replace(
+                            /\b(\d{1,2}):(\d{2})\b/g,
+                            (match, hour, min) => {
+                              const h = parseInt(hour)
+                              const suffix = h >= 12 ? 'PM' : 'AM'
+                              const displayHour = h % 12 || 12
+                              return `${displayHour}:${min} ${suffix}`
+                            }
+                          )
+
+                      return (
+                        <tr key={idx}>
+                          <td className='font-black text-ub-dark pr-1'>{displayDays}</td>
+                          <td>{displayHours}</td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
                 </table>
               </div>
               <div className='text-ub-white border-2 border-ub-dark flex flex-col items-center justify-center gap-5 p-5'>

@@ -19,7 +19,8 @@ const markdownPlugin: Plugin = {
         id.includes('_menus') ||
         id.includes('_specials') ||
         id.includes('_happy_hour') ||
-        id.includes('_content'))
+        id.includes('_content') ||
+        id.includes('_hours'))
     ) {
       // Return markdown file as raw string, not parsed JavaScript
       const filePath = id.split('?')[0]
